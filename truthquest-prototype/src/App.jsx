@@ -231,14 +231,14 @@ function App() {
           <div className="status-bar">
             <div className="status-pills">
               <div className="pill coins">
-                <Coins size={16} fill="currentColor" /> {coins}
+                <Coins size={16} fill="currentColor" /> <span translate="no">{coins}</span>
               </div>
               <div className="pill streak">
-                <Zap size={16} fill="currentColor" /> {streak}
+                <Zap size={16} fill="currentColor" /> <span translate="no">{streak}</span>
               </div>
             </div>
             <div className="pill">
-              <Heart size={16} color="#ef4444" fill="#ef4444" /> {lives}
+              <Heart size={16} color="#ef4444" fill="#ef4444" /> <span translate="no">{lives}</span>
             </div>
           </div>
         </div>

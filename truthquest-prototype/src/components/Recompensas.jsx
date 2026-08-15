@@ -37,7 +37,7 @@ export default function Recompensas({ coins, setCoins, inventory, setInventory, 
         <div>
           <h3 style={{color: '#b45309', margin: '0 0 4px 0'}}>Tu Saldo</h3>
           <p style={{color: '#92400e', margin: 0, fontWeight: 'bold', fontSize: '24px', display: 'flex', alignItems: 'center', gap: '8px'}}>
-            <Coins size={28} /> {coins}
+            <Coins size={28} /> <span translate="no">{coins}</span>
           </p>
         </div>
         <button 
@@ -54,7 +54,8 @@ export default function Recompensas({ coins, setCoins, inventory, setInventory, 
           <Sparkles size={20} color="var(--primary)" /> Recompensa Diaria
         </h3>
         <p style={{marginBottom: '16px'}}>
-          {dailyClaimed ? '¡Vuelve mañana para reclamar tu cofre misterioso!' : '¡Abre tu cofre diario gratis!'}
+          <span style={{display: dailyClaimed ? 'inline' : 'none'}}>¡Vuelve mañana para reclamar tu cofre misterioso!</span>
+          <span style={{display: !dailyClaimed ? 'inline' : 'none'}}>¡Abre tu cofre diario gratis!</span>
         </p>
         <button 
           className={dailyClaimed ? "btn-secondary" : "btn-primary"} 
@@ -62,7 +63,8 @@ export default function Recompensas({ coins, setCoins, inventory, setInventory, 
           style={{opacity: dailyClaimed ? 0.5 : 1}}
           onClick={handleClaimDaily}
         >
-          {dailyClaimed ? 'Reclamada hoy' : 'Reclamar 150 Monedas'}
+          <span style={{display: dailyClaimed ? 'inline' : 'none'}}>Reclamada hoy</span>
+          <span style={{display: !dailyClaimed ? 'inline' : 'none'}}>Reclamar 150 Monedas</span>
         </button>
       </div>
 
@@ -76,7 +78,7 @@ export default function Recompensas({ coins, setCoins, inventory, setInventory, 
           const canBuy = coins >= item.price
           return (
             <div key={item.id} className="category-card" style={{padding: '16px'}}>
-              <div style={{fontSize: '40px', marginBottom: '8px', filter: isPurchased ? 'none' : 'grayscale(0.5)'}}>{item.icon}</div>
+              <div style={{fontSize: '40px', marginBottom: '8px', filter: isPurchased ? 'none' : 'grayscale(0.5)'}} translate="no">{item.icon}</div>
               <h4 style={{fontSize: '14px', margin: '0 0 8px 0', minHeight: '34px'}}>{item.name}</h4>
               <button 
                 className={canBuy && !isPurchased ? "btn-primary" : "btn-secondary"} 
@@ -87,7 +89,12 @@ export default function Recompensas({ coins, setCoins, inventory, setInventory, 
                 disabled={!canBuy || isPurchased}
                 onClick={() => handleBuyItem(item)}
               >
-                {isPurchased ? <><Check size={14}/> Comprado</> : <><Coins size={14} /> {item.price}</>}
+                <span style={{display: isPurchased ? 'flex' : 'none', alignItems: 'center', gap: '4px'}}>
+                  <Check size={14}/> Comprado
+                </span>
+                <span style={{display: !isPurchased ? 'flex' : 'none', alignItems: 'center', gap: '4px'}}>
+                  <Coins size={14} /> <span translate="no">{item.price}</span>
+                </span>
               </button>
             </div>
           )
