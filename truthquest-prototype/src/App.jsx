@@ -102,155 +102,118 @@ function App() {
     setShowBuyModal(false)
   }
 
-  if (authMode === 'login') {
-    return (
-      <div className="mobile-container">
-        <Login onLogin={handleLogin} />
-      </div>
-    )
+  const handleLogout = () => {
+    setAuthMode('login')
   }
 
-  return (
-    <div className="mobile-container animate-slide-up">
-      {/* Top Header & Status Bar */}
-      <div className="app-header">
-        <div className="logo-area">
-          <Shield size={24} color="var(--primary)" fill="var(--primary)" /> TruthQuest
+  const renderContent = () => {
+    if (authMode === 'login') {
+      return (
+        <div className="mobile-container" style={{ width: '100%', height: '100%' }}>
+          <Login onLogin={handleLogin} />
         </div>
-        <div className="status-bar">
-          <div className="status-pills">
-            <div className="pill coins">
-              <Coins size={16} fill="currentColor" /> {coins}
-            </div>
-            <div className="pill streak">
-              <Zap size={16} fill="currentColor" /> {streak}
-            </div>
-          </div>
-          <div className="pill">
-            <Heart size={16} color="#ef4444" fill="#ef4444" /> {lives}
-          </div>
-        </div>
-      </div>
+      );
+    }
 
-      {/* Main Content Area */}
-      <div className="content-area">
-        {currentChallenge?.mode === 'aprender' && (
-          <Desafio 
-            category={currentChallenge.category} 
-            onFinish={handleFinishChallenge} 
-          />
-        )}
-        
-        {currentChallenge?.mode === 'duelo' && (
-          <Duelo 
-            type={currentChallenge.type} 
-            onFinish={handleFinishDuel}
-            userName={userName}
-            userAvatar={userAvatar}
-          />
-        )}
-
-        {!currentChallenge && (
-          <>
-            {activeTab === 'mundo' && <Mundo xp={xp} inventory={inventory} onParticipate={() => handleStartChallenge('empatia')} />}
-            {activeTab === 'aprender' && <Aprender onStart={handleStartChallenge} />}
-            {activeTab === 'duelo' && (
-              <div className="animate-slide-up" style={{textAlign: 'center', paddingTop: '20px'}}>
-                <Swords size={64} style={{margin: '0 auto 24px auto', color: 'var(--primary)'}}/>
-                <h1>Arena de Duelos</h1>
-                <p style={{marginBottom: '32px'}}>Compite en tiempo real para demostrar quién identifica mejor la desinformación.</p>
-                <button className="btn-primary" onClick={() => handleStartDuel('random')} style={{marginBottom: '16px'}}>
-                  Buscar Oponente
-                </button>
-                <button className="btn-secondary" onClick={() => handleStartDuel('friend')}>
-                  Jugar con un Amigo
-                </button>
-              </div>
-            )}
-            {activeTab === 'recompensas' && (
-              <Recompensas 
-        {/* Header */}
-        <header className="app-header">
+    return (
+      <div className="mobile-container animate-slide-up">
+        {/* Top Header & Status Bar */}
+        <div className="app-header">
           <div className="logo-area">
-            <Shield size={24} />
-            <span>TruthQuest</span>
+            <Shield size={24} color="var(--primary)" fill="var(--primary)" /> TruthQuest
           </div>
           <div className="status-bar">
             <div className="status-pills">
               <div className="pill coins">
-                <Coins size={16} />
-                <span>{stats.coins}</span>
+                <Coins size={16} fill="currentColor" /> {coins}
               </div>
               <div className="pill streak">
-                <Zap size={16} fill="currentColor" />
-                <span>{stats.streak}</span>
+                <Zap size={16} fill="currentColor" /> {streak}
               </div>
             </div>
             <div className="pill">
-              <Heart size={16} color="#ef4444" fill="#ef4444" />
-              <span style={{color: '#ef4444'}}>{stats.lives}</span>
+              <Heart size={16} color="#ef4444" fill="#ef4444" /> {lives}
             </div>
           </div>
-        </header>
+        </div>
 
-        {/* Dynamic Content */}
+        {/* Main Content Area */}
         <div className="content-area">
-          {activeTab === 'mundo' && <Mundo onPlay={(challenge) => {
-            setCurrentChallenge(challenge)
-            setActiveTab('desafio')
-          }} />}
-          {activeTab === 'aprender' && <Aprender />}
-          {activeTab === 'duelo' && <Duelo onWin={() => {
-            setStats(s => ({...s, coins: s.coins + 50, xp: s.xp + 100}))
-          }} />}
-          {activeTab === 'tienda' && <Recompensas 
-                coins={stats.coins} 
-                setCoins={(val) => setStats(s => ({...s, coins: val}))} 
-                inventory={inventory}
-                setInventory={setInventory}
-                onOpenBuyModal={() => setShowBuyModal(true)}
-              />}
-          {activeTab === 'perfil' && <Perfil 
-            stats={stats} 
-            userName={userName} 
-            setUserName={setUserName} 
-            userAvatar={userAvatar}
-            setUserAvatar={setUserAvatar}
-            onLogout={handleLogout}
-          />}
-          {activeTab === 'desafio' && currentChallenge && (
+          {currentChallenge?.mode === 'aprender' && (
             <Desafio 
-              challenge={currentChallenge} 
-              onComplete={(success) => {
-                if (success) {
-                  setStats(s => ({...s, coins: s.coins + 10, xp: s.xp + 50}))
-                }
-                setActiveTab('mundo')
-                setCurrentChallenge(null)
-              }} 
+              category={currentChallenge.category} 
+              onFinish={handleFinishChallenge} 
             />
+          )}
+          
+          {currentChallenge?.mode === 'duelo' && (
+            <Duelo 
+              type={currentChallenge.type} 
+              onFinish={handleFinishDuel}
+              userName={userName}
+              userAvatar={userAvatar}
+            />
+          )}
+
+          {!currentChallenge && (
+            <>
+              {activeTab === 'mundo' && <Mundo xp={xp} inventory={inventory} onParticipate={() => handleStartChallenge('empatia')} />}
+              {activeTab === 'aprender' && <Aprender onStart={handleStartChallenge} />}
+              {activeTab === 'duelo' && (
+                <div className="animate-slide-up" style={{textAlign: 'center', paddingTop: '20px'}}>
+                  <Swords size={64} style={{margin: '0 auto 24px auto', color: 'var(--primary)'}}/>
+                  <h1>Arena de Duelos</h1>
+                  <p style={{marginBottom: '32px'}}>Compite en tiempo real para demostrar quién identifica mejor la desinformación.</p>
+                  <button className="btn-primary" onClick={() => handleStartDuel('random')} style={{marginBottom: '16px'}}>
+                    Buscar Oponente
+                  </button>
+                  <button className="btn-secondary" onClick={() => handleStartDuel('friend')}>
+                    Jugar con un Amigo
+                  </button>
+                </div>
+              )}
+              {activeTab === 'recompensas' && (
+                <Recompensas 
+                  coins={coins} 
+                  setCoins={setCoins} 
+                  inventory={inventory}
+                  setInventory={setInventory}
+                  onOpenBuyModal={() => setShowBuyModal(true)}
+                />
+              )}
+              {activeTab === 'perfil' && (
+                <Perfil 
+                  stats={{xp}} 
+                  userName={userName} 
+                  setUserName={setUserName} 
+                  userAvatar={userAvatar} 
+                  setUserAvatar={setUserAvatar} 
+                  onLogout={handleLogout}
+                />
+              )}
+            </>
           )}
         </div>
 
         {/* Bottom Navigation */}
-        {activeTab !== 'desafio' && (
-          <nav className="bottom-nav">
+        {!currentChallenge && (
+          <div className="bottom-nav">
             <button className={`nav-item ${activeTab === 'mundo' ? 'active' : ''}`} onClick={() => setActiveTab('mundo')}>
-              <Home size={24} /><span>Mundo</span>
+              <Home size={24} /> Mundo
             </button>
             <button className={`nav-item ${activeTab === 'aprender' ? 'active' : ''}`} onClick={() => setActiveTab('aprender')}>
-              <BookOpen size={24} /><span>Aprender</span>
+              <BookOpen size={24} /> Aprender
             </button>
             <button className={`nav-item ${activeTab === 'duelo' ? 'active' : ''}`} onClick={() => setActiveTab('duelo')}>
-              <Swords size={24} /><span>Duelo</span>
+              <Swords size={24} /> Duelo
             </button>
-            <button className={`nav-item ${activeTab === 'tienda' ? 'active' : ''}`} onClick={() => setActiveTab('tienda')}>
-              <Gift size={24} /><span>Tienda</span>
+            <button className={`nav-item ${activeTab === 'recompensas' ? 'active' : ''}`} onClick={() => setActiveTab('recompensas')}>
+              <Gift size={24} /> Tienda
             </button>
             <button className={`nav-item ${activeTab === 'perfil' ? 'active' : ''}`} onClick={() => setActiveTab('perfil')}>
-              <User size={24} /><span>Perfil</span>
+              <User size={24} /> Perfil
             </button>
-          </nav>
+          </div>
         )}
       </div>
     );
