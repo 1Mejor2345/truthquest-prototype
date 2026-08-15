@@ -117,7 +117,11 @@ export default function Duelo({ type, onFinish, userName = "Tú", userAvatar = "
         
         <div className="glass-card" style={{marginTop: '24px', display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
           <div>
-            <div style={{fontSize: '40px'}}>{userAvatar}</div>
+            <div style={{fontSize: '40px', width: '48px', height: '48px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+              {userAvatar.startsWith('blob:') || userAvatar.startsWith('http') || userAvatar.startsWith('data:') 
+                ? <img src={userAvatar} alt="avatar" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover'}} /> 
+                : userAvatar}
+            </div>
             <h3>{userName}</h3>
             <p style={{fontSize: '24px', fontWeight: 'bold', color: 'var(--primary)'}}>{myScore}</p>
           </div>
@@ -155,7 +159,11 @@ export default function Duelo({ type, onFinish, userName = "Tú", userAvatar = "
       {/* HUD Header */}
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px'}}>
         <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
-          <div style={{fontSize: '24px'}}>{userAvatar}</div>
+          <div style={{fontSize: '24px', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            {userAvatar.startsWith('blob:') || userAvatar.startsWith('http') || userAvatar.startsWith('data:') 
+              ? <img src={userAvatar} alt="avatar" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover'}} /> 
+              : userAvatar}
+          </div>
           <div><h4 style={{margin: 0}}>{userName}</h4><p style={{margin: 0, fontSize: '14px', color: 'var(--primary)', fontWeight: 'bold'}}>{myScore}</p></div>
         </div>
         

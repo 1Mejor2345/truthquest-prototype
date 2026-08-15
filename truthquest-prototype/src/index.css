@@ -47,6 +47,7 @@ body {
   width: 375px;
   min-width: 375px;
   max-width: 375px;
+  flex-shrink: 0;
   height: 100dvh;
   max-height: 812px;
   background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);

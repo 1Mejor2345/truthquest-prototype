@@ -31,13 +31,16 @@ export default function Perfil({ stats, userName, setUserName, userAvatar, setUs
               fontSize: '40px', margin: '0 auto 12px auto', border: '4px solid white', boxShadow: 'var(--shadow-md)',
               position: 'relative'
             }}>
-              {userAvatar}
+              {userAvatar.startsWith('blob:') || userAvatar.startsWith('http') || userAvatar.startsWith('data:') 
+                ? <img src={userAvatar} alt="avatar" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover'}} /> 
+                : userAvatar}
               <button 
                 onClick={() => setIsEditing(true)}
                 style={{
                   position: 'absolute', bottom: '-5px', right: '-5px', background: 'white', border: 'none', 
                   borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', 
-                  justifyContent: 'center', boxShadow: 'var(--shadow-md)', cursor: 'pointer', fontSize: '14px'
+                  justifyContent: 'center', boxShadow: 'var(--shadow-md)', cursor: 'pointer', fontSize: '14px',
+                  zIndex: 10
                 }}>
                 ✏️
               </button>
@@ -48,7 +51,7 @@ export default function Perfil({ stats, userName, setUserName, userAvatar, setUs
         ) : (
           <div className="glass-card" style={{margin: '0 20px', padding: '20px'}}>
             <h3 style={{marginBottom: '16px'}}>Editar Perfil</h3>
-            <div style={{display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '16px'}}>
+            <div style={{display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '16px', flexWrap: 'wrap'}}>
               {['😎', '🤖', '🦊', '👩‍💻', '🧙‍♂️', '🦸‍♀️', '👻'].map(emoji => (
                 <button 
                   key={emoji}
@@ -62,6 +65,16 @@ export default function Perfil({ stats, userName, setUserName, userAvatar, setUs
                 </button>
               ))}
             </div>
+            
+            <label style={{cursor: 'pointer', background: 'var(--surface-solid)', color: 'var(--text-main)', border: '1px solid #e5e7eb', padding: '8px 16px', borderRadius: 'var(--radius-full)', margin: '0 auto 16px auto', display: 'inline-block', fontSize: '14px', fontWeight: '600', boxShadow: 'var(--shadow-sm)'}}>
+              📸 Subir Foto
+              <input type="file" accept="image/*" style={{display: 'none'}} onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  const url = URL.createObjectURL(e.target.files[0]);
+                  setTempAvatar(url);
+                }
+              }} />
+            </label>
             <input 
               type="text" 
               value={tempName} 
