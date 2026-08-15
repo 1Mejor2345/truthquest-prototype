@@ -173,10 +173,45 @@ function App() {
     setAuthMode('login')
   }
 
+  const renderTopControls = () => (
+    <div style={{display: 'flex', alignItems: 'center', gap: '12px'}} translate="no">
+      <button 
+        onClick={() => setShowLangModal(true)}
+        style={{
+          background: 'var(--surface)', color: 'var(--primary)',
+          border: '1px solid var(--primary)', borderRadius: '50%',
+          width: '32px', height: '32px',
+          display: 'flex', justifyContent: 'center', alignItems: 'center',
+          cursor: 'pointer'
+        }}
+        title="Language"
+      >
+        <Globe size={16} />
+      </button>
+      <button 
+        onClick={() => setVoiceEnabled(!voiceEnabled)}
+        style={{
+          background: voiceEnabled ? 'var(--primary)' : 'var(--surface)',
+          color: voiceEnabled ? 'white' : 'var(--primary)',
+          border: '1px solid var(--primary)', borderRadius: '50%',
+          width: '32px', height: '32px',
+          display: 'flex', justifyContent: 'center', alignItems: 'center',
+          cursor: 'pointer'
+        }}
+        title="Voice"
+      >
+        {voiceEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+      </button>
+    </div>
+  );
+
   const renderContent = () => {
     if (authMode === 'login') {
       return (
-        <div className="mobile-container" style={{ width: '100%', height: '100%' }}>
+        <div className="mobile-container" style={{ width: '100%', height: '100%', position: 'relative' }}>
+          <div style={{ position: 'absolute', top: '16px', right: '16px', zIndex: 10 }}>
+            {renderTopControls()}
+          </div>
           <Login onLogin={handleLogin} />
         </div>
       );
@@ -187,42 +222,11 @@ function App() {
         {/* Top Header & Status Bar */}
         <div className="app-header">
           <div className="logo-area" style={{justifyContent: 'space-between', width: '100%', paddingRight: '24px'}}>
-            <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+            <div style={{display: 'flex', alignItems: 'center', gap: '8px'}} translate="no">
               <Shield size={24} color="var(--primary)" fill="var(--primary)" /> TruthQuest
             </div>
             
-            <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
-              <button 
-                onClick={() => setShowLangModal(true)}
-                style={{
-                  background: 'var(--surface)',
-                  color: 'var(--primary)',
-                  border: '1px solid var(--primary)',
-                  borderRadius: '50%',
-                  width: '32px', height: '32px',
-                  display: 'flex', justifyContent: 'center', alignItems: 'center',
-                  cursor: 'pointer'
-                }}
-                title="Cambiar idioma"
-              >
-                <Globe size={16} />
-              </button>
-              <button 
-                onClick={() => setVoiceEnabled(!voiceEnabled)}
-                style={{
-                  background: voiceEnabled ? 'var(--primary)' : 'var(--surface)',
-                  color: voiceEnabled ? 'white' : 'var(--primary)',
-                  border: '1px solid var(--primary)',
-                  borderRadius: '50%',
-                  width: '32px', height: '32px',
-                  display: 'flex', justifyContent: 'center', alignItems: 'center',
-                  cursor: 'pointer'
-                }}
-                title={voiceEnabled ? 'Desactivar lectura' : 'Activar lectura por voz'}
-              >
-                {voiceEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
-              </button>
-            </div>
+            {renderTopControls()}
           </div>
           <div className="status-bar">
             <div className="status-pills">

@@ -28,7 +28,7 @@ export default function Login({ onLogin }) {
       
       <div style={{textAlign: 'center', marginBottom: '40px'}}>
         <Shield size={64} color="var(--primary)" fill="var(--primary)" style={{margin: '0 auto 16px auto'}} />
-        <h1 style={{fontSize: '36px', color: 'var(--primary-dark)', margin: 0}}>TruthQuest</h1>
+        <h1 style={{fontSize: '36px', color: 'var(--primary-dark)', margin: 0}} translate="no">TruthQuest</h1>
         <p style={{color: 'var(--text-muted)', fontSize: '16px'}}>Aprende a desmentir, jugando.</p>
       </div>
 

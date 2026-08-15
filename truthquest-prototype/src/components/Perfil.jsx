@@ -30,7 +30,7 @@ export default function Perfil({ stats, userName, setUserName, userAvatar, setUs
               color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: '40px', margin: '0 auto 12px auto', border: '4px solid white', boxShadow: 'var(--shadow-md)',
               position: 'relative'
-            }}>
+            }} translate="no">
               {userAvatar.startsWith('blob:') || userAvatar.startsWith('http') || userAvatar.startsWith('data:') 
                 ? <img src={userAvatar} alt="avatar" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover'}} /> 
                 : userAvatar}
@@ -45,7 +45,7 @@ export default function Perfil({ stats, userName, setUserName, userAvatar, setUs
                 ✏️
               </button>
             </div>
-            <h2>{userName}</h2>
+            <h2 translate="no">{userName}</h2>
             <p style={{color: 'var(--primary)', fontWeight: 'bold'}}>Nivel {Math.floor(stats.xp / 1000) + 1} • Liga Plata III</p>
           </>
         ) : (
