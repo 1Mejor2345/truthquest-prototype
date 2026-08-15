@@ -192,38 +192,44 @@ export default function Duelo({ type, onFinish, userName = "Tú", userAvatar = "
         {question.img && <img src={question.img} alt="Desafío visual" className="challenge-img duel-img" />}
         
         <div className="challenge-content" style={{padding: '12px 16px', flex: 1, overflowY: 'auto'}}>
-          <p style={{fontStyle: 'italic', marginBottom: '8px', fontSize: '14px', color: '#374151'}}>"{question.text}"</p>
-          <h3 style={{marginBottom: '16px', fontSize: '16px'}}>{question.q}</h3>
-          
-          <div className="options-list" style={{gap: '8px', paddingBottom: '0'}}>
-            {question.options.map((opt, idx) => {
-              let btnClass = 'option-btn';
-              if (selectedOpt !== null) {
-                if (idx === question.correct) btnClass += ' selected';
-                else if (idx === selectedOpt) btnClass += ' error';
-              }
+          {duelQuestions.map((q, qIdx) => (
+            <div key={qIdx} style={{display: (round - 1) === qIdx ? 'block' : 'none'}}>
+              <p style={{fontStyle: 'italic', marginBottom: '8px', fontSize: '14px', color: '#374151'}}>"{q.text}"</p>
+              <h3 style={{marginBottom: '16px', fontSize: '16px'}}>{q.q}</h3>
+              
+              <div className="options-list" style={{gap: '8px', paddingBottom: '0'}}>
+                {q.options.map((opt, idx) => {
+                  let btnClass = 'option-btn';
+                  if (selectedOpt !== null && (round - 1) === qIdx) {
+                    if (idx === q.correct) btnClass += ' selected';
+                    else if (idx === selectedOpt) btnClass += ' error';
+                  }
 
-              return (
-                <button 
-                  key={idx} 
-                  className={btnClass}
-                  style={{
-                    padding: '12px', 
-                    fontSize: '14px',
-                    ...(selectedOpt === idx && idx !== question.correct ? {borderColor: '#ef4444', background: '#fef2f2'} : {})
-                  }}
-                  onClick={() => handleAnswer(idx)}
-                  disabled={selectedOpt !== null || phase === 'countdown'}
-                >
-                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    {opt}
-                    {selectedOpt !== null && idx === question.correct && <Check color="#10b981" size={16} />}
-                    {selectedOpt === idx && idx !== question.correct && <X color="#ef4444" size={16} />}
-                  </div>
-                </button>
-              )
-            })}
-          </div>
+                  return (
+                    <button 
+                      key={idx} 
+                      className={btnClass}
+                      style={{
+                        width: '100%',
+                        marginBottom: '8px',
+                        padding: '12px', 
+                        fontSize: '14px',
+                        ...(selectedOpt === idx && idx !== q.correct && (round - 1) === qIdx ? {borderColor: '#ef4444', background: '#fef2f2'} : {})
+                      }}
+                      onClick={() => handleAnswer(idx)}
+                      disabled={selectedOpt !== null || phase === 'countdown'}
+                    >
+                      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                        <span>{opt}</span>
+                        {selectedOpt !== null && idx === q.correct && (round - 1) === qIdx && <Check color="#10b981" size={16} />}
+                        {selectedOpt === idx && idx !== q.correct && (round - 1) === qIdx && <X color="#ef4444" size={16} />}
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
