@@ -28,7 +28,7 @@ export default function Duelo({ type, onFinish, userName = "Tú", userAvatar = "
       q: "¿Qué tipo de mensaje es este?",
       options: ["Hoax (Bulo)", "Aviso oficial", "Noticia urgente"],
       correct: 0,
-      img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&auto=format&fit=crop"
+      img: "https://images.unsplash.com/photo-1614680376593-902f74a5cecb?w=600&auto=format&fit=crop"
     },
     {
       text: "Titular: 'Agua con limón cura todas las enfermedades'.",

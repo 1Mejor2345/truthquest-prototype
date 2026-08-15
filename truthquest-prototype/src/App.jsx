@@ -24,8 +24,8 @@ function App() {
       if (isMobile) {
         setScale(1);
       } else {
-        const scaleH = (window.innerHeight * 0.95) / 812;
-        const scaleW = (window.innerWidth * 0.95) / 375;
+        const scaleH = (window.innerHeight * 0.95) / 844;
+        const scaleW = (window.innerWidth * 0.95) / 390;
         setScale(Math.min(scaleH, scaleW, 1));
       }
     };
