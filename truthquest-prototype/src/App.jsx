@@ -42,6 +42,26 @@ function App() {
     };
   }, [voiceEnabled]);
   
+  // Google Translate Effect
+  useEffect(() => {
+    if (!window.googleTranslateElementInit) {
+      window.googleTranslateElementInit = () => {
+        if (window.google && window.google.translate) {
+          new window.google.translate.TranslateElement({
+            pageLanguage: 'es', 
+            includedLanguages: 'ar,en,es,fr,ru,zh-CN', 
+            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+          }, 'google_translate_element');
+        }
+      };
+      const script = document.createElement('script');
+      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+  
   // Responsive Scale Effect
   const [scale, setScale] = useState(1);
   const [isMobileView, setIsMobileView] = useState(false);
@@ -169,7 +189,6 @@ function App() {
               >
                 {voiceEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
               </button>
-              <div id="google_translate_element"></div>
             </div>
           </div>
           <div className="status-bar">
