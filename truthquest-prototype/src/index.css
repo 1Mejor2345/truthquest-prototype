@@ -44,7 +44,8 @@ body {
 
 /* Mobile Simulator Container */
 .mobile-container {
-  width: 100%;
+  width: 375px;
+  min-width: 375px;
   max-width: 375px;
   height: 100dvh;
   max-height: 812px;
@@ -64,6 +65,8 @@ body {
     background: #fdfbfb;
   }
   .mobile-container {
+    width: 100vw;
+    min-width: 0;
     max-width: 100vw;
     height: 100dvh;
     max-height: 100dvh;
@@ -284,16 +287,26 @@ p { font-size: 15px; line-height: 1.5; color: var(--text-muted); }
   transform: rotate(-10deg);
   border-radius: 50%;
 }
+@keyframes floatVillage {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
 .village-item {
   position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.4));
   transition: transform 0.2s;
+  animation: floatVillage 4s ease-in-out infinite;
+}
+.village-item:nth-child(even) {
+  animation-delay: 1.5s;
 }
 .village-item:hover {
-  transform: scale(1.1);
+  animation-play-state: paused;
+  transform: scale(1.1) translateY(-8px) !important;
 }
 .path {
   position: absolute;

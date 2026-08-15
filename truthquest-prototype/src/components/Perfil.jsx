@@ -1,7 +1,11 @@
 import React from 'react'
 import { Award, Zap, Crosshair, Map, ShieldCheck } from 'lucide-react'
 
-export default function Perfil({ stats }) {
+export default function Perfil({ stats, userName, setUserName, userAvatar, setUserAvatar }) {
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [tempName, setTempName] = React.useState(userName);
+  const [tempAvatar, setTempAvatar] = React.useState(userAvatar);
+
   const insignias = [
     { title: "Ojo Artificial", desc: "IA detectada 50 veces", icon: "🤖", active: true },
     { title: "Cazador de Titulares", desc: "Reconoció 20 engaños", icon: "🎣", active: true },
@@ -10,18 +14,70 @@ export default function Perfil({ stats }) {
     { title: "Maestría MIL", desc: "Todas las categorías completas", icon: "👑", active: false },
   ]
 
+  const handleSave = () => {
+    setUserName(tempName);
+    setUserAvatar(tempAvatar);
+    setIsEditing(false);
+  };
+
   return (
     <div className="animate-slide-up" style={{paddingBottom: '40px'}}>
-      <div style={{textAlign: 'center', marginBottom: '24px'}}>
-        <div style={{
-          width: '90px', height: '90px', borderRadius: '50%', background: 'var(--primary)', 
-          color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '40px', margin: '0 auto 12px auto', border: '4px solid white', boxShadow: 'var(--shadow-md)'
-        }}>
-          😎
-        </div>
-        <h2>Gamer_Mundo2026</h2>
-        <p style={{color: 'var(--primary)', fontWeight: 'bold'}}>Nivel {Math.floor(stats.xp / 1000) + 1} • Liga Plata III</p>
+      <div style={{textAlign: 'center', marginBottom: '24px', position: 'relative'}}>
+        {!isEditing ? (
+          <>
+            <div style={{
+              width: '90px', height: '90px', borderRadius: '50%', background: 'var(--primary)', 
+              color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: '40px', margin: '0 auto 12px auto', border: '4px solid white', boxShadow: 'var(--shadow-md)',
+              position: 'relative'
+            }}>
+              {userAvatar}
+              <button 
+                onClick={() => setIsEditing(true)}
+                style={{
+                  position: 'absolute', bottom: '-5px', right: '-5px', background: 'white', border: 'none', 
+                  borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', 
+                  justifyContent: 'center', boxShadow: 'var(--shadow-md)', cursor: 'pointer', fontSize: '14px'
+                }}>
+                ✏️
+              </button>
+            </div>
+            <h2>{userName}</h2>
+            <p style={{color: 'var(--primary)', fontWeight: 'bold'}}>Nivel {Math.floor(stats.xp / 1000) + 1} • Liga Plata III</p>
+          </>
+        ) : (
+          <div className="glass-card" style={{margin: '0 20px', padding: '20px'}}>
+            <h3 style={{marginBottom: '16px'}}>Editar Perfil</h3>
+            <div style={{display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '16px'}}>
+              {['😎', '🤖', '🦊', '👩‍💻', '🧙‍♂️', '🦸‍♀️', '👻'].map(emoji => (
+                <button 
+                  key={emoji}
+                  onClick={() => setTempAvatar(emoji)}
+                  style={{
+                    fontSize: '24px', background: tempAvatar === emoji ? 'var(--primary-light)' : 'transparent',
+                    border: 'none', borderRadius: '8px', padding: '8px', cursor: 'pointer', transition: 'all 0.2s'
+                  }}
+                >
+                  {emoji}
+                </button>
+              ))}
+            </div>
+            <input 
+              type="text" 
+              value={tempName} 
+              onChange={(e) => setTempName(e.target.value)}
+              style={{
+                width: '100%', padding: '12px', borderRadius: 'var(--radius-md)', border: '1px solid #d1d5db',
+                marginBottom: '16px', fontSize: '16px', textAlign: 'center'
+              }}
+              maxLength={15}
+            />
+            <div style={{display: 'flex', gap: '8px'}}>
+              <button className="btn-secondary" onClick={() => setIsEditing(false)}>Cancelar</button>
+              <button className="btn-primary" onClick={handleSave}>Guardar</button>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="category-grid" style={{marginBottom: '24px'}}>

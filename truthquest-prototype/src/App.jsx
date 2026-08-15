@@ -19,6 +19,10 @@ function App() {
   const [xp, setXp] = useState(2500)
   const [inventory, setInventory] = useState({})
   
+  // User Profile State
+  const [userName, setUserName] = useState('Gamer_Mundo2026')
+  const [userAvatar, setUserAvatar] = useState('😎')
+  
   // Global Modals
   const [showBuyModal, setShowBuyModal] = useState(false)
 
@@ -84,7 +88,12 @@ function App() {
         )}
         
         {currentChallenge?.mode === 'duelo' && (
-          <Duelo type={currentChallenge.type} onFinish={handleFinishDuel} />
+          <Duelo 
+            type={currentChallenge.type} 
+            onFinish={handleFinishDuel}
+            userName={userName}
+            userAvatar={userAvatar}
+          />
         )}
 
         {!currentChallenge && (
@@ -113,7 +122,15 @@ function App() {
                 onOpenBuyModal={() => setShowBuyModal(true)}
               />
             )}
-            {activeTab === 'perfil' && <Perfil stats={{xp}} />}
+            {activeTab === 'perfil' && (
+              <Perfil 
+                stats={{xp}} 
+                userName={userName} 
+                setUserName={setUserName} 
+                userAvatar={userAvatar} 
+                setUserAvatar={setUserAvatar} 
+              />
+            )}
           </>
         )}
       </div>

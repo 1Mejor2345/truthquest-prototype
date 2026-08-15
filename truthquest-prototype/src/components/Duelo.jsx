@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Swords, Clock, Check, X, Users } from 'lucide-react'
 
-export default function Duelo({ type, onFinish }) {
+export default function Duelo({ type, onFinish, userName = "Tú", userAvatar = "😎" }) {
   const [phase, setPhase] = useState('matchmaking') // matchmaking, countdown, playing, result
   const [opponent, setOpponent] = useState(null)
   const [countdown, setCountdown] = useState(3)
@@ -117,8 +117,8 @@ export default function Duelo({ type, onFinish }) {
         
         <div className="glass-card" style={{marginTop: '24px', display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
           <div>
-            <div style={{fontSize: '40px'}}>😎</div>
-            <h3>Tú</h3>
+            <div style={{fontSize: '40px'}}>{userAvatar}</div>
+            <h3>{userName}</h3>
             <p style={{fontSize: '24px', fontWeight: 'bold', color: 'var(--primary)'}}>{myScore}</p>
           </div>
           <div><Swords size={24} color="#9ca3af" /></div>
@@ -155,8 +155,8 @@ export default function Duelo({ type, onFinish }) {
       {/* HUD Header */}
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px'}}>
         <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
-          <div style={{fontSize: '24px'}}>😎</div>
-          <div><h4 style={{margin: 0}}>Tú</h4><p style={{margin: 0, fontSize: '14px', color: 'var(--primary)', fontWeight: 'bold'}}>{myScore}</p></div>
+          <div style={{fontSize: '24px'}}>{userAvatar}</div>
+          <div><h4 style={{margin: 0}}>{userName}</h4><p style={{margin: 0, fontSize: '14px', color: 'var(--primary)', fontWeight: 'bold'}}>{myScore}</p></div>
         </div>
         
         <div style={{textAlign: 'center'}}>
