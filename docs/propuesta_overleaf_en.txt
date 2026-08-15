@@ -243,7 +243,7 @@ Existing media education programs are mostly \textbf{theoretical, academic, and 
 \begin{warnbox}
 \textbf{Key Fact:} 86\% of global internet users admit to having been fooled by fake news at least once (CIGI-Ipsos, 2019). Among 16-24 year olds, continuous exposure to visual platforms makes them especially vulnerable to synthetic content and deepfakes.
 \end{warnbox}
-
+\newpage
 % ══════════════════════════════════════════════════════════
 % 3 · TARGET AUDIENCE & INCLUSION
 % ══════════════════════════════════════════════════════════
@@ -267,7 +267,7 @@ A truly global MIL solution must transcend language and visual limitations. Alig
 
 \vspace{6pt}
 \noindent
-\begin{minipage}[t]{0.65\textwidth}
+\begin{minipage}[t]{0.6\textwidth}
   \vspace{0pt}
   \begin{accentbox}
   \textbf{\faIcon{universal-access}\; The Six Official UNESCO Languages \& Real-Time TTS}
@@ -283,10 +283,10 @@ A truly global MIL solution must transcend language and visual limitations. Alig
   \vspace{0pt}
   \centering
   \setlength{\fboxsep}{0pt}\setlength{\fboxrule}{1pt}\fbox{\includegraphics[width=\textwidth]{IDIOMAS.png}}
-  \captionof{figure}{Global Translation.}
+  \captionof{figure}{Translation}
 \end{minipage}
 \vspace{6pt}
-
+\newpage
 % ══════════════════════════════════════════════════════════
 % 4 · THE SOLUTION: TRUTHQUEST
 % ══════════════════════════════════════════════════════════
@@ -300,7 +300,7 @@ TruthQuest is not a course disguised as an application. It is a \textbf{game at 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=15.5cm]{DIAGRAMA1.png}
+  \includegraphics[width=16.5cm]{DIAGRAMA1.png}
   \caption{Complete User Experience flow in TruthQuest.}
 \end{figure}
 
@@ -473,7 +473,7 @@ Unlike existing solutions (video courses, PDF booklets, in-person workshops), Tr
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.65\textwidth]{DIAGRAMA2.png}
+  \includegraphics[width=0.9\textwidth]{DIAGRAMA2.png}
   \caption{Technical Architecture: Frontend (React + Vite), Modules, Backend (Firebase)}
 \end{figure}
 
@@ -556,7 +556,7 @@ TruthQuest is designed to be sustainable without relying on continuous external 
   \item \textbf{Community-Generated Content:} Advanced users will be able to propose challenges, reviewed by moderators.
   \item \textbf{Real-Time Integration:} Community Missions are based on real disinformation campaigns happening in the world at that exact moment.
 \end{itemize}
-
+\newpage
 % ══════════════════════════════════════════════════════════
 % 10 · SOCIAL IMPACT
 % ══════════════════════════════════════════════════════════
@@ -603,7 +603,7 @@ TruthQuest is designed to be sustainable without relying on continuous external 
 \bottomrule
 \end{tabularx}
 \end{center}
-
+\newpage
 % ══════════════════════════════════════════════════════════
 % 12 · REFERENCES
 % ══════════════════════════════════════════════════════════
@@ -618,7 +618,7 @@ TruthQuest is designed to be sustainable without relying on continuous external 
 % ══════════════════════════════════════════════════════════
 % CLOSING
 % ══════════════════════════════════════════════════════════
-\vspace{1.5cm}
+\vspace{10cm}
 \begin{center}
   {\color{TQindigo}\rule{4cm}{1pt}}\\[16pt]
   {\huge\textcolor{TQslate}{\textit{``Truth does not defend itself.}}}\\[8pt]
