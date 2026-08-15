@@ -141,7 +141,17 @@
   \fill[TQamber, opacity=0.08] ([xshift=17cm, yshift=20cm]current page.south west) circle (3.5cm);
 \end{tikzpicture}
 
-\vspace*{3cm}
+% ── Logos Header ──
+\begin{tikzpicture}[remember picture, overlay]
+  \node[anchor=north west, xshift=2cm, yshift=-1.5cm] at (current page.north west) {
+    \includegraphics[height=1.8cm]{logo_espol.png}
+  };
+  \node[anchor=north east, xshift=-2cm, yshift=-1.5cm] at (current page.north east) {
+    \includegraphics[height=1.8cm]{UNESCO_LOGO.png}
+  };
+\end{tikzpicture}
+
+\vspace*{2cm}
 
 \begin{center}
   % ── Logo / Shield ──
@@ -155,7 +165,7 @@
   \vspace{12pt}
   {\Large\textcolor{white!85}{Play Your Part: Youth Designing the Future of\\Media and Information Literacy}}
 
-  \vspace{2.5cm}
+  \vspace{2cm}
 
   % ── Team Box (Alphabetical Order) ──
   \begin{tcolorbox}[
@@ -184,7 +194,7 @@
     }
   \end{tcolorbox}
 
-  \vspace{2cm}
+  \vspace{1.5cm}
   {\normalsize\textcolor{TQmuted}{UNESCO Youth Hackathon 2026 · Global MIL Week}}\\[4pt]
   {\small\textcolor{TQmuted}{Athens, Greece · August 2026}}
 \end{center}
@@ -255,14 +265,27 @@ Existing media education programs are mostly \textbf{theoretical, academic, and 
 
 A truly global MIL solution must transcend language and visual limitations. Aligning closely with UNESCO's mandate for universal education, TruthQuest integrates two groundbreaking accessibility pillars directly into its core architecture:
 
-\begin{accentbox}
-\textbf{\faIcon{universal-access}\; The Six Official UNESCO Languages \& Real-Time TTS}
-\begin{itemize}[leftmargin=1cm, itemsep=2pt, topsep=4pt]
-  \item \textbf{Global Translation Engine:} With a single tap, the entire application interface translates instantly into the six official UNESCO languages: \textbf{English, French, Spanish, Arabic, Chinese, and Russian}. Our dynamic React DOM is engineered to maintain perfect layout integrity across all alphabets, including Right-to-Left (RTL) scripts.
-  \item \textbf{Immersive Text-to-Speech (TTS):} An integrated Web Audio API synthesizer allows visually impaired users, or auditory learners, to hover over or tap any text on the screen to have the content read aloud. 
-  \item \textbf{Zero-Latency Sound Design:} Native browser audio APIs provide instant, subtle UI feedback (clicks, correct/incorrect chimes, coin drops) to enhance cognitive retention and engagement without relying on heavy media files, making it ideal for low-bandwidth environments.
-\end{itemize}
-\end{accentbox}
+\vspace{6pt}
+\noindent
+\begin{minipage}[t]{0.65\textwidth}
+  \vspace{0pt}
+  \begin{accentbox}
+  \textbf{\faIcon{universal-access}\; The Six Official UNESCO Languages \& Real-Time TTS}
+  \begin{itemize}[leftmargin=1cm, itemsep=2pt, topsep=4pt]
+    \item \textbf{Global Translation Engine:} With a single tap, the entire application interface translates instantly into the six official UNESCO languages: \textbf{English, French, Spanish, Arabic, Chinese, and Russian}. Our dynamic React DOM is engineered to maintain perfect layout integrity across all alphabets, including Right-to-Left (RTL) scripts.
+    \item \textbf{Immersive Text-to-Speech (TTS):} An integrated Web Audio API synthesizer allows visually impaired users, or auditory learners, to hover over or tap any text on the screen to have the content read aloud. 
+    \item \textbf{Zero-Latency Sound Design:} Native browser audio APIs provide instant, subtle UI feedback (clicks, correct/incorrect chimes, coin drops) to enhance cognitive retention and engagement without relying on heavy media files, making it ideal for low-bandwidth environments.
+  \end{itemize}
+  \end{accentbox}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.3\textwidth}
+  \vspace{0pt}
+  \centering
+  \setlength{\fboxsep}{0pt}\setlength{\fboxrule}{1pt}\fbox{\includegraphics[width=\textwidth]{IDIOMAS.png}}
+  \captionof{figure}{Global Translation.}
+\end{minipage}
+\vspace{6pt}
 
 % ══════════════════════════════════════════════════════════
 % 4 · THE SOLUTION: TRUTHQUEST
@@ -277,7 +300,7 @@ TruthQuest is not a course disguised as an application. It is a \textbf{game at 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=15.5cm]{DIAGRAMA1_EN.png}
+  \includegraphics[width=15.5cm]{DIAGRAMA1.png}
   \caption{Complete User Experience flow in TruthQuest.}
 \end{figure}
 
@@ -293,7 +316,7 @@ The application is structured into five interconnected modules, each with a spec
 \textcolor{TQindigo}{\faIcon{globe}\;\textbf{1. World — Visual Progression}}\\[4pt]
 The player owns a \textbf{Digital Village} that evolves as they learn. 
 \begin{center}
-  \includegraphics[height=7cm]{VILLAGE.png}
+  \setlength{\fboxsep}{0pt}\setlength{\fboxrule}{1pt}\fbox{\includegraphics[height=7cm]{ALDEA.png}}
   \captionof{figure}{World Screen: village-style progression map with unlockable nodes.}
 \end{center}
 \end{tcolorbox}
@@ -308,21 +331,23 @@ Instead of theoretical lessons, the user faces real dubious content: a sensation
 
 \begin{figure}[H]
   \centering
-  \begin{subfigure}[b]{0.32\textwidth}
+  \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \includegraphics[height=6.5cm]{LEARN.png}
+    \setlength{\fboxsep}{0pt}\setlength{\fboxrule}{1pt}\fbox{\includegraphics[height=6.5cm]{APRENDER.png}}
     \caption{Training categories.}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[b]{0.32\textwidth}
+  \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \includegraphics[height=6.5cm]{CHALLENGE.png}
+    \setlength{\fboxsep}{0pt}\setlength{\fboxrule}{1pt}\fbox{\includegraphics[height=6.5cm]{DESAFIO.png}}
     \caption{Micro-challenge with real content.}
   \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.32\textwidth}
+
+  \vspace{12pt}
+
+  \begin{subfigure}[b]{0.9\textwidth}
     \centering
-    \includegraphics[height=6.5cm]{DIAGRAMA3_EN.png}
+    \setlength{\fboxsep}{0pt}\setlength{\fboxrule}{1pt}\fbox{\includegraphics[width=\textwidth]{DIAGRAMA3.png}}
     \caption{Pedagogical Feedback Cycle.}
     \label{fig:cycle}
   \end{subfigure}
@@ -342,13 +367,13 @@ Two players analyze the same content simultaneously in 3 rounds of 10 seconds ea
   \centering
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \includegraphics[height=6.5cm]{DUEL.png}
+    \setlength{\fboxsep}{0pt}\setlength{\fboxrule}{1pt}\fbox{\includegraphics[height=6.5cm]{DUELO.png}}
     \caption{Duel in action: Round 2 of 3.}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \includegraphics[height=6.5cm]{DUEL_RESULT.png}
+    \setlength{\fboxsep}{0pt}\setlength{\fboxrule}{1pt}\fbox{\includegraphics[height=6.5cm]{RESULTADO_DUELO.png}}
     \caption{Victory and rewards screen.}
   \end{subfigure}
   \caption{Duel Mode: real-time competition with rewards for victory.}
@@ -363,7 +388,7 @@ Two players analyze the same content simultaneously in 3 rounds of 10 seconds ea
 \textcolor{TQamber}{\faIcon{store}\;\textbf{4. Store — Ethical Freemium Model}}\\[4pt]
 Users earn coins by playing and can purchase cosmetics to customize their village (Lighthouse of Truth, Central Library) and claim daily rewards. MIL education is \textbf{never} locked behind a paywall.
 \begin{center}
-  \includegraphics[height=6.5cm]{STORE.png}
+  \setlength{\fboxsep}{0pt}\setlength{\fboxrule}{1pt}\fbox{\includegraphics[height=6.5cm]{TIENDA.png}}
   \captionof{figure}{Store: daily reward, village cosmetics, and coin system.}
 \end{center}
 \end{tcolorbox}
@@ -376,7 +401,7 @@ Users earn coins by playing and can purchase cosmetics to customize their villag
 \textcolor{TQslate}{\faIcon{user-circle}\;\textbf{5. Profile — Personal Analytics}}\\[4pt]
 Individual dashboard with accuracy statistics (87\%), victories (42), best streak (15), completed challenges (156), league level, and badges ("Artificial Eye" — AI detected 50 times). Allows the user to \textbf{measure their own growth} as a critical thinker.
 \begin{center}
-  \includegraphics[height=6.5cm]{PROFILE.png}
+  \setlength{\fboxsep}{0pt}\setlength{\fboxrule}{1pt}\fbox{\includegraphics[height=6.5cm]{PERFIL.png}}
   \captionof{figure}{Profile: stats, league, level, and badge system.}
 \end{center}
 \end{tcolorbox}
@@ -395,7 +420,7 @@ TruthQuest offers two access modes to minimize barriers:
 
 \begin{figure}[H]
   \centering
-  \includegraphics[height=7cm]{LOGIN.png}
+  \setlength{\fboxsep}{0pt}\setlength{\fboxrule}{1pt}\fbox{\includegraphics[height=7cm]{LOGIN.png}}
   \caption{Home screen: profile registration or guest access.}
 \end{figure}
 
@@ -448,7 +473,7 @@ Unlike existing solutions (video courses, PDF booklets, in-person workshops), Tr
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.65\textwidth]{DIAGRAMA2_EN.png}
+  \includegraphics[width=0.65\textwidth]{DIAGRAMA2.png}
   \caption{Technical Architecture: Frontend (React + Vite), Modules, Backend (Firebase)}
 \end{figure}
 
