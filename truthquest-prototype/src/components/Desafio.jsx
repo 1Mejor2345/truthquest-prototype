@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { CheckCircle2, XCircle, ChevronRight } from 'lucide-react'
+import { playCorrect, playIncorrect, playClick } from '../utils/audio'
 
 // Extended Mock Data with Images and variety
 const MOCK_QUESTIONS = {
@@ -135,9 +136,16 @@ export default function Desafio({ category, onFinish, onBack }) {
   const handleSelect = (idx) => {
     if (showFeedback) return;
     setSelectedOpt(idx)
+    playClick()
+    
     setTimeout(() => {
       setShowFeedback(true)
-    }, 500)
+      if (idx === q.correct) {
+        playCorrect()
+      } else {
+        playIncorrect()
+      }
+    }, 400)
   }
 
   const handleNext = () => {

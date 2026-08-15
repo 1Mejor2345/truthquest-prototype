@@ -7,6 +7,7 @@ import Duelo from './components/Duelo'
 import Perfil from './components/Perfil'
 import Recompensas from './components/Recompensas'
 import Login from './components/Login'
+import { initAudio, playClick, playCoin } from './utils/audio'
 import './index.css'
 
 function App() {
@@ -108,6 +109,8 @@ function App() {
   const [showBuyModal, setShowBuyModal] = useState(false)
 
   const handleLogin = (name, avatar, guest) => {
+    initAudio(); // Initialize audio context on first user gesture
+    playClick(); // Play a nice click sound
     setIsGuest(guest);
     setUserName(name);
     setUserAvatar(avatar);
@@ -127,20 +130,28 @@ function App() {
     setAuthMode('app');
   }
 
+  const handleTabChange = (tab) => {
+    playClick();
+    setActiveTab(tab);
+  }
+
   const handleStartChallenge = (category) => {
+    playClick();
     setCurrentChallenge({ category, mode: 'aprender' })
   }
 
   const handleStartDuel = (type = 'random') => {
+    playClick();
     setCurrentChallenge({ mode: 'duelo', type })
   }
 
   const handleFinishChallenge = (won, coinsEarned) => {
-    if (won) {
+    if (won && coinsEarned > 0) {
+      playCoin();
       setCoins(c => c + coinsEarned)
       setStreak(s => s + 1)
       setXp(x => x + 150)
-    } else {
+    } else if (!won) {
       setLives(l => Math.max(0, l - 1))
       setStreak(0)
     }
@@ -305,19 +316,19 @@ function App() {
         {/* Bottom Navigation */}
         {!currentChallenge && (
           <div className="bottom-nav">
-            <button className={`nav-item ${activeTab === 'mundo' ? 'active' : ''}`} onClick={() => setActiveTab('mundo')}>
+            <button className={`nav-item ${activeTab === 'mundo' ? 'active' : ''}`} onClick={() => handleTabChange('mundo')}>
               <Home size={24} /> Mundo
             </button>
-            <button className={`nav-item ${activeTab === 'aprender' ? 'active' : ''}`} onClick={() => setActiveTab('aprender')}>
+            <button className={`nav-item ${activeTab === 'aprender' ? 'active' : ''}`} onClick={() => handleTabChange('aprender')}>
               <BookOpen size={24} /> Aprender
             </button>
-            <button className={`nav-item ${activeTab === 'duelo' ? 'active' : ''}`} onClick={() => setActiveTab('duelo')}>
+            <button className={`nav-item ${activeTab === 'duelo' ? 'active' : ''}`} onClick={() => handleTabChange('duelo')}>
               <Swords size={24} /> Duelo
             </button>
-            <button className={`nav-item ${activeTab === 'recompensas' ? 'active' : ''}`} onClick={() => setActiveTab('recompensas')}>
+            <button className={`nav-item ${activeTab === 'recompensas' ? 'active' : ''}`} onClick={() => handleTabChange('recompensas')}>
               <Gift size={24} /> Tienda
             </button>
-            <button className={`nav-item ${activeTab === 'perfil' ? 'active' : ''}`} onClick={() => setActiveTab('perfil')}>
+            <button className={`nav-item ${activeTab === 'perfil' ? 'active' : ''}`} onClick={() => handleTabChange('perfil')}>
               <User size={24} /> Perfil
             </button>
           </div>
@@ -390,7 +401,7 @@ function App() {
               </button>
             </div>
             
-            <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
+            <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}} translate="no">
               <button className="btn-secondary" onClick={() => handleLanguageChange('es')}>🇪🇸 Español</button>
               <button className="btn-secondary" onClick={() => handleLanguageChange('en')}>🇬🇧 English</button>
               <button className="btn-secondary" onClick={() => handleLanguageChange('fr')}>🇫🇷 Français</button>

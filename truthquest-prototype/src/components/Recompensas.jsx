@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Gift, Sparkles, Coins, ShoppingBag, Check } from 'lucide-react'
+import { playClick, playCoin } from '../utils/audio'
 
 export default function Recompensas({ coins, setCoins, inventory, setInventory, onOpenBuyModal }) {
   const [dailyClaimed, setDailyClaimed] = useState(false)
@@ -13,6 +14,7 @@ export default function Recompensas({ coins, setCoins, inventory, setInventory, 
 
   const handleClaimDaily = () => {
     if(!dailyClaimed) {
+      playCoin();
       setCoins(c => c + 150)
       setDailyClaimed(true)
     }
@@ -20,8 +22,11 @@ export default function Recompensas({ coins, setCoins, inventory, setInventory, 
 
   const handleBuyItem = (item) => {
     if(coins >= item.price && !inventory[item.id]) {
+      playCoin();
       setCoins(c => c - item.price)
       setInventory(prev => ({...prev, [item.id]: true}))
+    } else {
+      playClick();
     }
   }
 
