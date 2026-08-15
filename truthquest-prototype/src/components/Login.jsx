@@ -17,7 +17,7 @@ export default function Login({ onLogin }) {
 
   return (
     <div className="animate-slide-up" style={{
-      height: '100%', 
+      flex: 1, 
       display: 'flex', 
       flexDirection: 'column', 
       alignItems: 'center', 

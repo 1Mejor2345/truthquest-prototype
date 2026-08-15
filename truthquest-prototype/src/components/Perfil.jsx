@@ -1,7 +1,7 @@
 import React from 'react'
-import { Award, Zap, Crosshair, Map, ShieldCheck } from 'lucide-react'
+import { Award, Zap, Crosshair, Map, ShieldCheck, LogOut } from 'lucide-react'
 
-export default function Perfil({ stats, userName, setUserName, userAvatar, setUserAvatar }) {
+export default function Perfil({ stats, userName, setUserName, userAvatar, setUserAvatar, onLogout }) {
   const [isEditing, setIsEditing] = React.useState(false);
   const [tempName, setTempName] = React.useState(userName);
   const [tempAvatar, setTempAvatar] = React.useState(userAvatar);
@@ -138,6 +138,13 @@ export default function Perfil({ stats, userName, setUserName, userAvatar, setUs
           </div>
         ))}
       </div>
+      <button 
+        className="btn-secondary" 
+        style={{marginTop: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', color: 'var(--danger)', borderColor: 'var(--danger)', background: '#fef2f2'}}
+        onClick={onLogout}
+      >
+        <LogOut size={20} /> Cerrar Sesión
+      </button>
     </div>
   )
 }

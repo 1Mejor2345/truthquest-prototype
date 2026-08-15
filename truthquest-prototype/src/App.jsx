@@ -162,6 +162,7 @@ function App() {
                 setUserName={setUserName} 
                 userAvatar={userAvatar} 
                 setUserAvatar={setUserAvatar} 
+                onLogout={() => setAuthMode('login')}
               />
             )}
           </>
