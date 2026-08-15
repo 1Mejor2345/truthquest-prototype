@@ -27,13 +27,15 @@ export default function Duelo({ type, onFinish, userName = "Tú", userAvatar = "
       text: "WhatsApp: '¡Alerta! Si no reenvías esto, te cobrarán'.",
       q: "¿Qué tipo de mensaje es este?",
       options: ["Hoax (Bulo)", "Aviso oficial", "Noticia urgente"],
-      correct: 0
+      correct: 0,
+      img: "/whatsapp_hoax.jpg"
     },
     {
       text: "Titular: 'Agua con limón cura todas las enfermedades'.",
       q: "¿Cuál es la mejor forma de actuar?",
       options: ["Probar el remedio", "Buscar estudio médico", "Difundirlo rápido"],
-      correct: 1
+      correct: 1,
+      img: "/lemon_hoax.jpg"
     }
   ]
 
