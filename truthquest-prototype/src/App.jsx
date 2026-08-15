@@ -14,15 +14,19 @@ function App() {
   const [currentChallenge, setCurrentChallenge] = useState(null)
   
   // Responsive Scale Effect
+  const [scale, setScale] = useState(1);
+  const [isMobileView, setIsMobileView] = useState(false);
+
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 480) {
-        document.documentElement.style.setProperty('--app-scale', 1);
+      const isMobile = window.innerWidth <= 480;
+      setIsMobileView(isMobile);
+      if (isMobile) {
+        setScale(1);
       } else {
         const scaleH = (window.innerHeight * 0.95) / 812;
         const scaleW = (window.innerWidth * 0.95) / 375;
-        const scale = Math.min(scaleH, scaleW, 1);
-        document.documentElement.style.setProperty('--app-scale', scale);
+        setScale(Math.min(scaleH, scaleW, 1));
       }
     };
     window.addEventListener('resize', handleResize);
@@ -165,49 +169,114 @@ function App() {
             )}
             {activeTab === 'recompensas' && (
               <Recompensas 
-                coins={coins} 
-                setCoins={setCoins} 
+        {/* Header */}
+        <header className="app-header">
+          <div className="logo-area">
+            <Shield size={24} />
+            <span>TruthQuest</span>
+          </div>
+          <div className="status-bar">
+            <div className="status-pills">
+              <div className="pill coins">
+                <Coins size={16} />
+                <span>{stats.coins}</span>
+              </div>
+              <div className="pill streak">
+                <Zap size={16} fill="currentColor" />
+                <span>{stats.streak}</span>
+              </div>
+            </div>
+            <div className="pill">
+              <Heart size={16} color="#ef4444" fill="#ef4444" />
+              <span style={{color: '#ef4444'}}>{stats.lives}</span>
+            </div>
+          </div>
+        </header>
+
+        {/* Dynamic Content */}
+        <div className="content-area">
+          {activeTab === 'mundo' && <Mundo onPlay={(challenge) => {
+            setCurrentChallenge(challenge)
+            setActiveTab('desafio')
+          }} />}
+          {activeTab === 'aprender' && <Aprender />}
+          {activeTab === 'duelo' && <Duelo onWin={() => {
+            setStats(s => ({...s, coins: s.coins + 50, xp: s.xp + 100}))
+          }} />}
+          {activeTab === 'tienda' && <Recompensas 
+                coins={stats.coins} 
+                setCoins={(val) => setStats(s => ({...s, coins: val}))} 
                 inventory={inventory}
                 setInventory={setInventory}
                 onOpenBuyModal={() => setShowBuyModal(true)}
-              />
-            )}
-            {activeTab === 'perfil' && (
-              <Perfil 
-                stats={{xp}} 
-                userName={userName} 
-                setUserName={setUserName} 
-                userAvatar={userAvatar} 
-                setUserAvatar={setUserAvatar} 
-                onLogout={() => setAuthMode('login')}
-              />
-            )}
-          </>
+              />}
+          {activeTab === 'perfil' && <Perfil 
+            stats={stats} 
+            userName={userName} 
+            setUserName={setUserName} 
+            userAvatar={userAvatar}
+            setUserAvatar={setUserAvatar}
+            onLogout={handleLogout}
+          />}
+          {activeTab === 'desafio' && currentChallenge && (
+            <Desafio 
+              challenge={currentChallenge} 
+              onComplete={(success) => {
+                if (success) {
+                  setStats(s => ({...s, coins: s.coins + 10, xp: s.xp + 50}))
+                }
+                setActiveTab('mundo')
+                setCurrentChallenge(null)
+              }} 
+            />
+          )}
+        </div>
+
+        {/* Bottom Navigation */}
+        {activeTab !== 'desafio' && (
+          <nav className="bottom-nav">
+            <button className={`nav-item ${activeTab === 'mundo' ? 'active' : ''}`} onClick={() => setActiveTab('mundo')}>
+              <Home size={24} /><span>Mundo</span>
+            </button>
+            <button className={`nav-item ${activeTab === 'aprender' ? 'active' : ''}`} onClick={() => setActiveTab('aprender')}>
+              <BookOpen size={24} /><span>Aprender</span>
+            </button>
+            <button className={`nav-item ${activeTab === 'duelo' ? 'active' : ''}`} onClick={() => setActiveTab('duelo')}>
+              <Swords size={24} /><span>Duelo</span>
+            </button>
+            <button className={`nav-item ${activeTab === 'tienda' ? 'active' : ''}`} onClick={() => setActiveTab('tienda')}>
+              <Gift size={24} /><span>Tienda</span>
+            </button>
+            <button className={`nav-item ${activeTab === 'perfil' ? 'active' : ''}`} onClick={() => setActiveTab('perfil')}>
+              <User size={24} /><span>Perfil</span>
+            </button>
+          </nav>
         )}
       </div>
+    );
+  };
 
-      {/* Bottom Navigation */}
-      {!currentChallenge && (
-        <div className="bottom-nav">
-          <button className={`nav-item ${activeTab === 'mundo' ? 'active' : ''}`} onClick={() => setActiveTab('mundo')}>
-            <Home size={24} /> Mundo
-          </button>
-          <button className={`nav-item ${activeTab === 'aprender' ? 'active' : ''}`} onClick={() => setActiveTab('aprender')}>
-            <BookOpen size={24} /> Aprender
-          </button>
-          <button className={`nav-item ${activeTab === 'duelo' ? 'active' : ''}`} onClick={() => setActiveTab('duelo')}>
-            <Swords size={24} /> Duelo
-          </button>
-          <button className={`nav-item ${activeTab === 'recompensas' ? 'active' : ''}`} onClick={() => setActiveTab('recompensas')}>
-            <Gift size={24} /> Tienda
-          </button>
-          <button className={`nav-item ${activeTab === 'perfil' ? 'active' : ''}`} onClick={() => setActiveTab('perfil')}>
-            <User size={24} /> Perfil
-          </button>
-        </div>
-      )}
+  return (
+    <div className="scale-wrapper" style={{
+      width: isMobileView ? '100vw' : `${375 * scale}px`,
+      height: isMobileView ? '100dvh' : `${812 * scale}px`,
+      display: 'flex',
+      alignItems: 'flex-start',
+      justifyContent: 'flex-start',
+      position: 'relative',
+      margin: isMobileView ? '0' : 'auto'
+    }}>
+      <div style={{
+        transform: isMobileView ? 'none' : `scale(${scale})`,
+        transformOrigin: 'top left',
+        width: isMobileView ? '100%' : '375px',
+        height: isMobileView ? '100%' : '812px',
+        display: 'flex'
+      }}>
+        {renderContent()}
+      </div>
 
-      {/* Global Modals (Rendered outside scroll container to always stay on top) */}
+      {/* Global Modals */}
       {showBuyModal && (
         <div className="modal-overlay" style={{opacity: 1, zIndex: 500}}>
           <div className="modal-content">
