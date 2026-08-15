@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Home, BookOpen, Swords, Gift, User, Heart, Coins, Zap, Shield, X } from 'lucide-react'
+import { Home, BookOpen, Swords, Gift, User, Heart, Coins, Zap, Shield, X, Volume2, VolumeX } from 'lucide-react'
 import Mundo from './components/Mundo'
 import Aprender from './components/Aprender'
 import Desafio from './components/Desafio'
@@ -12,6 +12,35 @@ import './index.css'
 function App() {
   const [activeTab, setActiveTab] = useState('mundo')
   const [currentChallenge, setCurrentChallenge] = useState(null)
+  const [voiceEnabled, setVoiceEnabled] = useState(false)
+  
+  // Voice Synthesis Effect
+  useEffect(() => {
+    if (!voiceEnabled) {
+      window.speechSynthesis.cancel();
+      return;
+    }
+    
+    const handleSpeak = (e) => {
+      const target = e.target.closest('h1, h2, h3, h4, p, span, button');
+      if (target && target.innerText && target.innerText.trim().length > 0) {
+        window.speechSynthesis.cancel();
+        const msg = new SpeechSynthesisUtterance(target.innerText);
+        const htmlLang = document.documentElement.lang;
+        msg.lang = htmlLang || 'es-ES';
+        window.speechSynthesis.speak(msg);
+      }
+    };
+    
+    document.addEventListener('mouseover', handleSpeak);
+    document.addEventListener('touchstart', handleSpeak, {passive: true});
+
+    return () => {
+      document.removeEventListener('mouseover', handleSpeak);
+      document.removeEventListener('touchstart', handleSpeak);
+      window.speechSynthesis.cancel();
+    };
+  }, [voiceEnabled]);
   
   // Responsive Scale Effect
   const [scale, setScale] = useState(1);
@@ -119,8 +148,29 @@ function App() {
       <div className="mobile-container animate-slide-up">
         {/* Top Header & Status Bar */}
         <div className="app-header">
-          <div className="logo-area">
-            <Shield size={24} color="var(--primary)" fill="var(--primary)" /> TruthQuest
+          <div className="logo-area" style={{justifyContent: 'space-between', width: '100%', paddingRight: '24px'}}>
+            <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+              <Shield size={24} color="var(--primary)" fill="var(--primary)" /> TruthQuest
+            </div>
+            
+            <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
+              <button 
+                onClick={() => setVoiceEnabled(!voiceEnabled)}
+                style={{
+                  background: voiceEnabled ? 'var(--primary)' : 'var(--surface)',
+                  color: voiceEnabled ? 'white' : 'var(--primary)',
+                  border: '1px solid var(--primary)',
+                  borderRadius: '50%',
+                  width: '32px', height: '32px',
+                  display: 'flex', justifyContent: 'center', alignItems: 'center',
+                  cursor: 'pointer'
+                }}
+                title={voiceEnabled ? 'Desactivar lectura' : 'Activar lectura por voz'}
+              >
+                {voiceEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+              </button>
+              <div id="google_translate_element"></div>
+            </div>
           </div>
           <div className="status-bar">
             <div className="status-pills">
