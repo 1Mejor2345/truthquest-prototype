@@ -35,10 +35,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  height: 100dvh;
-  overflow: hidden;
+  min-height: 100vh;
   margin: 0;
+  padding: 20px 0;
   color: var(--text-main);
   background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
   background-size: 20px 20px;
@@ -46,10 +45,11 @@ body {
 
 /* Mobile Simulator Container */
 .mobile-container {
-  width: 100%;
-  max-width: 400px;
-  height: 100%;
-  max-height: 850px;
+  width: 375px;
+  min-width: 375px;
+  height: 812px;
+  min-height: 812px;
+  flex-shrink: 0;
   background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
   position: relative;
   overflow: hidden;
@@ -60,21 +60,16 @@ body {
   border: 14px solid #1f2937;
 }
 
-@media (min-width: 481px) {
-  .mobile-container {
-    height: 95vh;
-  }
-}
-
 @media (max-width: 480px) {
   body {
     background: #fdfbfb;
+    padding: 0;
   }
   .mobile-container {
     width: 100vw;
-    max-width: 100vw;
+    min-width: 100vw;
     height: 100dvh;
-    max-height: 100dvh;
+    min-height: 100dvh;
     border: none;
     border-radius: 0;
     box-shadow: none;
