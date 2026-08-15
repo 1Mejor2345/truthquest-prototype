@@ -221,13 +221,17 @@ function App() {
 
   return (
     <div className="scale-wrapper" style={{
-      width: isMobileView ? '100vw' : `${375 * scale}px`,
-      height: isMobileView ? '100dvh' : `${812 * scale}px`,
+      width: isMobileView ? '100%' : `${375 * scale}px`,
+      height: isMobileView ? '100%' : `${812 * scale}px`,
       display: 'flex',
       alignItems: 'flex-start',
       justifyContent: 'flex-start',
-      position: 'relative',
-      margin: isMobileView ? '0' : 'auto'
+      position: isMobileView ? 'fixed' : 'relative',
+      top: isMobileView ? 0 : 'auto',
+      left: isMobileView ? 0 : 'auto',
+      margin: isMobileView ? '0' : 'auto',
+      backgroundColor: isMobileView ? '#fdfbfb' : 'transparent',
+      zIndex: isMobileView ? 9999 : 1
     }}>
       <div style={{
         transform: isMobileView ? 'none' : `scale(${scale})`,
