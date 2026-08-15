@@ -21,21 +21,21 @@ export default function Duelo({ type, onFinish }) {
       q: "¿Qué debes hacer antes de compartirlo?",
       options: ["Compartir", "Verificar en sitios oficiales", "Creerlo ciegamente"],
       correct: 1,
-      img: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&auto=format&fit=crop"
+      img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=600&auto=format&fit=crop"
     },
     {
       text: "WhatsApp: '¡Alerta! Si no reenvías esto, te cobrarán'.",
       q: "¿Qué tipo de mensaje es este?",
       options: ["Hoax (Bulo)", "Aviso oficial", "Noticia urgente"],
       correct: 0,
-      img: "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=600&auto=format&fit=crop"
+      img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&auto=format&fit=crop"
     },
     {
       text: "Titular: 'Agua con limón cura todas las enfermedades'.",
       q: "¿Cuál es la mejor forma de actuar?",
       options: ["Probar el remedio", "Buscar estudio médico", "Difundirlo rápido"],
       correct: 1,
-      img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&auto=format&fit=crop"
+      img: "https://images.unsplash.com/photo-1523428461295-d232dbf556b4?w=600&auto=format&fit=crop"
     }
   ]
 
@@ -179,9 +179,9 @@ export default function Duelo({ type, onFinish }) {
 
       {/* Question Card */}
       <div className="challenge-card" style={{flex: 1, border: '2px solid var(--primary-light)', marginBottom: '0'}}>
-        <img src={question.img} alt="Desafío visual" className="challenge-img duel-img" />
+        <img src={question.img} alt="Desafío visual" className="challenge-img duel-img" style={{height: '100px', minHeight: '100px'}} />
         
-        <div className="challenge-content" style={{padding: '16px', flex: 1, overflowY: 'auto'}}>
+        <div className="challenge-content" style={{padding: '12px 16px', flex: 1, overflowY: 'auto'}}>
           <p style={{fontStyle: 'italic', marginBottom: '8px', fontSize: '14px', color: '#374151'}}>"{question.text}"</p>
           <h3 style={{marginBottom: '16px', fontSize: '16px'}}>{question.q}</h3>
           
