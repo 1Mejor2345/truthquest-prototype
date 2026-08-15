@@ -161,7 +161,10 @@ function App() {
     const select = document.querySelector('.goog-te-combo');
     if (select) {
       select.value = langCode;
-      select.dispatchEvent(new Event('change'));
+      select.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+    } else {
+      document.cookie = `googtrans=/es/${langCode}; path=/`;
+      window.location.reload();
     }
     setShowLangModal(false);
   }

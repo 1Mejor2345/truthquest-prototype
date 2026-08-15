@@ -125,11 +125,12 @@ export default function Desafio({ category, onFinish, onBack }) {
   const [currentIdx, setCurrentIdx] = useState(0)
   const [selectedOpt, setSelectedOpt] = useState(null)
   const [showFeedback, setShowFeedback] = useState(false)
+  const [coinsWon, setCoinsWon] = useState(0)
 
   // Fallback to 'ia' if category not found
   const questions = MOCK_QUESTIONS[category] || MOCK_QUESTIONS['ia']
   // Cycle through questions based on clicks
-  const q = questions[currentIdx % questions.length]
+  const q = questions[currentIdx]
 
   const handleSelect = (idx) => {
     if (showFeedback) return;
@@ -141,9 +142,18 @@ export default function Desafio({ category, onFinish, onBack }) {
 
   const handleNext = () => {
     const won = selectedOpt === q.correct
-    // Move to next question for next time
-    setCurrentIdx(i => i + 1)
-    onFinish(won, won ? 20 : 0)
+    const newCoins = coinsWon + (won ? 20 : 0)
+    setCoinsWon(newCoins)
+
+    if (currentIdx + 1 < questions.length) {
+      // Avanzar a la siguiente pregunta
+      setCurrentIdx(i => i + 1)
+      setSelectedOpt(null)
+      setShowFeedback(false)
+    } else {
+      // Terminar la ronda si ya no hay más preguntas
+      onFinish(true, newCoins) // Enviar true para no quitar vidas si completó la ronda, y sumar sus monedas
+    }
   }
 
   return (
