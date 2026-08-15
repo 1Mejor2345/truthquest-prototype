@@ -27,15 +27,13 @@ export default function Duelo({ type, onFinish, userName = "Tú", userAvatar = "
       text: "WhatsApp: '¡Alerta! Si no reenvías esto, te cobrarán'.",
       q: "¿Qué tipo de mensaje es este?",
       options: ["Hoax (Bulo)", "Aviso oficial", "Noticia urgente"],
-      correct: 0,
-      img: "https://images.unsplash.com/photo-1614680376593-902f74a5cecb?w=600&auto=format&fit=crop"
+      correct: 0
     },
     {
       text: "Titular: 'Agua con limón cura todas las enfermedades'.",
       q: "¿Cuál es la mejor forma de actuar?",
       options: ["Probar el remedio", "Buscar estudio médico", "Difundirlo rápido"],
-      correct: 1,
-      img: "https://images.unsplash.com/photo-1523428461295-d232dbf556b4?w=600&auto=format&fit=crop"
+      correct: 1
     }
   ]
 
@@ -187,7 +185,7 @@ export default function Duelo({ type, onFinish, userName = "Tú", userAvatar = "
 
       {/* Question Card */}
       <div className="challenge-card" style={{flex: 1, border: '2px solid var(--primary-light)', marginBottom: '0'}}>
-        <img src={question.img} alt="Desafío visual" className="challenge-img duel-img" />
+        {question.img && <img src={question.img} alt="Desafío visual" className="challenge-img duel-img" />}
         
         <div className="challenge-content" style={{padding: '12px 16px', flex: 1, overflowY: 'auto'}}>
           <p style={{fontStyle: 'italic', marginBottom: '8px', fontSize: '14px', color: '#374151'}}>"{question.text}"</p>

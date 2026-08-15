@@ -4,110 +4,144 @@ export default function Mundo({ xp, inventory, onParticipate }) {
   const level = Math.floor(xp / 1000) + 1;
   const progress = (xp % 1000) / 10;
 
+  // The nodes to display in the path
+  const nodes = [
+    { id: 'faro', icon: '🗼', label: 'Faro MIL', unlocked: inventory.faro, color: '#10b981' },
+    { id: 'radar', icon: '⛲', label: 'Fuente', extra: inventory.radar ? '📡' : null, unlocked: true, color: '#3b82f6' },
+    { id: 'biblio', icon: inventory.biblio ? '🏛️' : '🏰', label: inventory.biblio ? 'Gran Biblio' : 'Academia', unlocked: true, color: '#f59e0b' },
+    { id: 'bosque', icon: '🌲', label: 'Bosque', extra: inventory.buho ? '🦉' : null, unlocked: true, color: '#059669' },
+    { id: 'barrio', icon: '🏘️', label: 'Barrio MIL', unlocked: true, color: '#4f46e5' },
+  ];
+
   return (
     <div className="animate-slide-up" style={{display: 'flex', flexDirection: 'column', flex: 1, paddingBottom: '20px'}}>
-      <div style={{ marginBottom: '24px' }}>
+      
+      {/* Top Header */}
+      <div style={{ marginBottom: '16px' }}>
         <h1 style={{fontSize: '32px'}}>Tu Aldea</h1>
         <p style={{fontSize: '16px', fontWeight: '500'}}>Nivel {level} • Sabio Digital</p>
       </div>
 
-      {/* Improved World Map - Realistic Landscape with Connected Paths */}
-      <div className="world-map" style={{
-        backgroundImage: 'url(https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=800&auto=format&fit=crop)', 
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        border: '4px solid var(--primary-light)',
-        boxShadow: '0 10px 25px -5px rgba(79, 70, 229, 0.5)',
-        height: '400px',
-        position: 'relative'
-      }}>
-        <div style={{
-          position: 'absolute', inset: 0, 
-          background: 'linear-gradient(to top, rgba(16, 185, 129, 0.3), rgba(79, 70, 229, 0.5))'
-        }}></div>
-
-        {/* SVG Paths Connecting Nodes */}
-        <svg style={{position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1}}>
-          <path 
-            d="M 60 320 C 100 200, 160 220, 180 180" 
-            fill="none" 
-            stroke="rgba(255,255,255,0.8)" 
-            strokeWidth="4" 
-            strokeDasharray="10, 10" 
-            style={{ animation: 'dashAnim 20s linear infinite' }} 
-          />
-          <path 
-            d="M 180 180 C 200 120, 260 100, 290 80" 
-            fill="none" 
-            stroke="rgba(255,255,255,0.8)" 
-            strokeWidth="4" 
-            strokeDasharray="10, 10" 
-            style={{ animation: 'dashAnim 20s linear infinite' }} 
-          />
-          {inventory.faro && (
-            <path 
-              d="M 290 80 C 320 180, 320 250, 290 320" 
-              fill="none" 
-              stroke="rgba(16,185,129,0.8)" 
-              strokeWidth="4" 
-              strokeDasharray="10, 10" 
-              style={{ animation: 'dashAnim 20s linear infinite' }} 
-            />
-          )}
-        </svg>
-
-        {/* Node 1: Barrio MIL */}
-        <div className="village-item" style={{bottom: '40px', left: '25px', zIndex: 2, background: 'rgba(255,255,255,0.3)', padding: '16px', borderRadius: '50%', backdropFilter: 'blur(12px)', border: '2px solid rgba(255,255,255,0.9)', boxShadow: '0 8px 32px rgba(0,0,0,0.3)'}}>
-          <div style={{fontSize: '48px', filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.8))', marginTop: '-8px'}}>🏘️</div>
-          <span style={{background: 'var(--primary)', color: 'white', padding: '6px 12px', borderRadius: '16px', fontSize: '12px', fontWeight: 'bold', position: 'absolute', bottom: '-20px', whiteSpace: 'nowrap', boxShadow: '0 4px 6px rgba(0,0,0,0.3)'}}>Barrio MIL</span>
+      {/* Progress Card */}
+      <div className="glass-card" style={{marginBottom: '20px', padding: '16px'}}>
+        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px'}}>
+          <h3 style={{fontSize: '15px', margin: 0, color: 'var(--text-main)'}}>Próximo Nivel</h3>
+          <span style={{fontSize: '13px', fontWeight: 'bold', color: 'var(--primary)'}}>{xp} / {level * 1000} XP</span>
         </div>
-        
-        {/* Node 2: Bosque / Buho */}
-        <div className="village-item" style={{top: '40px', left: '40px', zIndex: 2, background: 'rgba(255,255,255,0.2)', padding: '12px', borderRadius: '50%', backdropFilter: 'blur(8px)', border: '2px solid rgba(255,255,255,0.6)'}}>
-          <div style={{fontSize: '36px', filter: 'drop-shadow(0 0 10px rgba(16,185,129,0.8))'}}>🌲</div>
-          {inventory.buho && <div style={{position: 'absolute', top: '-20px', right: '-15px', fontSize: '36px', animation: 'bounce 2s infinite', filter: 'drop-shadow(0 0 15px rgba(245,158,11,0.9))'}}>🦉</div>}
-        </div>
-        
-        {/* Node 3: Academia / Gran Biblio */}
-        <div className="village-item" style={{top: '30px', right: '40px', zIndex: 2, background: 'rgba(255,255,255,0.3)', padding: '16px', borderRadius: '50%', backdropFilter: 'blur(12px)', border: '2px solid rgba(255,255,255,0.9)', boxShadow: '0 8px 32px rgba(0,0,0,0.3)'}}>
-          <div style={{fontSize: '56px', filter: 'drop-shadow(0 0 15px rgba(245,158,11,0.8))', marginTop: '-8px'}}>{inventory.biblio ? '🏛️' : '🏰'}</div>
-          <span style={{background: 'var(--warning)', color: '#fff', padding: '6px 12px', borderRadius: '16px', fontSize: '12px', fontWeight: 'bold', position: 'absolute', bottom: '-20px', whiteSpace: 'nowrap', boxShadow: '0 4px 6px rgba(0,0,0,0.3)'}}>
-            {inventory.biblio ? 'Gran Biblio' : 'Academia'}
-          </span>
-        </div>
-        
-        {/* Node 4: Fuente / Radar */}
-        <div className="village-item" style={{top: '140px', left: '150px', zIndex: 2, background: 'rgba(255,255,255,0.3)', padding: '14px', borderRadius: '50%', backdropFilter: 'blur(12px)', border: '2px solid rgba(255,255,255,0.9)', boxShadow: '0 8px 32px rgba(0,0,0,0.3)'}}>
-          <div style={{fontSize: '44px', filter: 'drop-shadow(0 0 10px rgba(59,130,246,0.8))'}}>⛲</div>
-          {inventory.radar && <div style={{position: 'absolute', bottom: '-15px', right: '-20px', fontSize: '36px', filter: 'drop-shadow(0 0 15px rgba(255,255,255,0.9))'}}>📡</div>}
-        </div>
-
-        {/* Node 5: Faro MIL (Unlockable) */}
-        <div className="village-item" style={{bottom: '40px', right: '35px', zIndex: 2, background: 'rgba(255,255,255,0.3)', padding: '16px', borderRadius: '50%', backdropFilter: 'blur(12px)', border: '2px solid rgba(255,255,255,0.9)', filter: inventory.faro ? 'none' : 'grayscale(1) opacity(0.7)', boxShadow: '0 8px 32px rgba(0,0,0,0.3)'}}>
-          <div style={{fontSize: '52px', filter: inventory.faro ? 'drop-shadow(0 0 20px rgba(16,185,129,0.9))' : 'none', marginTop: '-8px'}}>🗼</div>
-          <span style={{background: inventory.faro ? '#10b981' : '#4b5563', color: 'white', padding: '6px 12px', borderRadius: '16px', fontSize: '12px', fontWeight: 'bold', position: 'absolute', bottom: '-20px', whiteSpace: 'nowrap', boxShadow: '0 4px 6px rgba(0,0,0,0.3)'}}>
-            {inventory.faro ? 'Faro MIL' : 'Bloqueado'}
-          </span>
-        </div>
-      </div>
-
-      <div className="glass-card" style={{marginTop: '12px'}}>
-        <h3 style={{fontSize: '16px', color: 'var(--text-main)'}}>Progreso al Nivel {level + 1}</h3>
-        <div className="progress-container" style={{ margin: '12px 0', height: '10px' }}>
+        <div className="progress-container" style={{ height: '8px' }}>
           <div className="progress-fill" style={{ width: `${progress}%`, background: 'linear-gradient(90deg, var(--primary), var(--primary-light))' }}></div>
         </div>
-        <div style={{display: 'flex', justifyContent: 'space-between', fontSize: '13px', fontWeight: 'bold', color: 'var(--text-muted)'}}>
-          <span>{xp} XP</span>
-          <span>{(level) * 1000} XP</span>
-        </div>
       </div>
 
-      <div className="glass-card" style={{borderLeft: '4px solid var(--warning)', display: 'flex', flexDirection: 'column', gap: '12px'}}>
+      {/* Duolingo-style Vertical Path Map */}
+      <div style={{
+        background: '#e0f2fe',
+        borderRadius: '24px',
+        padding: '32px 16px',
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '40px',
+        overflow: 'hidden',
+        boxShadow: 'inset 0 4px 10px rgba(0,0,0,0.05)',
+        border: '4px solid #bae6fd'
+      }}>
+        
+        {/* Background Path Line */}
+        <div style={{
+          position: 'absolute',
+          top: '0',
+          bottom: '0',
+          width: '16px',
+          background: '#bae6fd',
+          zIndex: 1,
+          borderRadius: '8px'
+        }}></div>
+
+        {nodes.map((node, index) => {
+          // Zigzag positioning
+          const isLeft = index % 2 === 0;
+          const transformAmount = isLeft ? '-40px' : '40px';
+
+          return (
+            <div key={node.id} style={{
+              zIndex: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              transform: `translateX(${transformAmount})`,
+              filter: node.unlocked ? 'none' : 'grayscale(1) opacity(0.6)'
+            }}>
+              
+              {/* Bubble */}
+              <div style={{
+                width: '76px',
+                height: '76px',
+                borderRadius: '50%',
+                background: node.unlocked ? node.color : '#9ca3af',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '36px',
+                boxShadow: `0 8px 0 ${node.unlocked ? node.color + 'aa' : '#6b7280'}, 0 15px 20px rgba(0,0,0,0.2)`,
+                border: '4px solid white',
+                position: 'relative',
+                transition: 'transform 0.2s',
+                cursor: 'pointer'
+              }}
+              onMouseDown={(e) => e.currentTarget.style.transform = 'translateY(8px)'}
+              onMouseUp={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+              >
+                <div style={{filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'}}>{node.icon}</div>
+                
+                {/* Extra mascot/icon floating */}
+                {node.extra && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '-15px',
+                    right: '-15px',
+                    fontSize: '28px',
+                    animation: 'bounce 2s infinite',
+                    filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.3))'
+                  }}>
+                    {node.extra}
+                  </div>
+                )}
+              </div>
+
+              {/* Label */}
+              <span style={{
+                marginTop: '16px',
+                background: 'white',
+                color: node.unlocked ? node.color : '#6b7280',
+                padding: '6px 14px',
+                borderRadius: '16px',
+                fontSize: '13px',
+                fontWeight: 'bold',
+                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                border: `2px solid ${node.unlocked ? node.color + '44' : '#e5e7eb'}`
+              }}>
+                {node.label}
+              </span>
+
+            </div>
+          )
+        })}
+
+        {/* Clouds decoration */}
+        <div style={{position: 'absolute', top: '10%', left: '10%', fontSize: '40px', opacity: 0.5}}>☁️</div>
+        <div style={{position: 'absolute', top: '40%', right: '5%', fontSize: '50px', opacity: 0.4}}>☁️</div>
+        <div style={{position: 'absolute', bottom: '20%', left: '5%', fontSize: '45px', opacity: 0.6}}>☁️</div>
+
+      </div>
+
+      <div className="glass-card" style={{borderLeft: '4px solid var(--warning)', marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '12px'}}>
         <div>
-          <h3 style={{display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--warning)'}}>
+          <h3 style={{display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--warning)', margin: 0}}>
             <span>🔥</span> Misión Comunitaria
           </h3>
-          <p style={{fontSize: '14px', lineHeight: '1.4'}}>
+          <p style={{fontSize: '14px', lineHeight: '1.4', marginTop: '8px'}}>
             La comunidad está desmintiendo un rumor sobre clonación de voz. ¡Únete para ganar el doble de recompensas!
           </p>
         </div>
@@ -115,6 +149,7 @@ export default function Mundo({ xp, inventory, onParticipate }) {
           Participar Ahora <span style={{fontSize: '20px'}}>⚔️</span>
         </button>
       </div>
+
     </div>
   )
 }
