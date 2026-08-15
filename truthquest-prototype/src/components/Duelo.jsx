@@ -112,32 +112,33 @@ export default function Duelo({ type, onFinish, userName = "Tú", userAvatar = "
     return (
       <div className="animate-slide-up" style={{textAlign: 'center', paddingTop: '20px'}}>
         <h1 style={{color: isWinner ? '#10b981' : '#ef4444', fontSize: '32px'}}>
-          {isWinner ? '¡VICTORIA!' : 'DERROTA'}
+          <span style={{display: isWinner ? 'inline' : 'none'}}>¡VICTORIA!</span>
+          <span style={{display: !isWinner ? 'inline' : 'none'}}>DERROTA</span>
         </h1>
         
         <div className="glass-card" style={{marginTop: '24px', display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
           <div>
-            <div style={{fontSize: '40px', width: '48px', height: '48px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <div style={{fontSize: '40px', width: '48px', height: '48px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center'}} translate="no">
               {userAvatar.startsWith('blob:') || userAvatar.startsWith('http') || userAvatar.startsWith('data:') 
                 ? <img src={userAvatar} alt="avatar" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover'}} /> 
                 : userAvatar}
             </div>
-            <h3>{userName}</h3>
-            <p style={{fontSize: '24px', fontWeight: 'bold', color: 'var(--primary)'}}>{myScore}</p>
+            <h3 translate="no">{userName}</h3>
+            <p style={{fontSize: '24px', fontWeight: 'bold', color: 'var(--primary)'}} translate="no">{myScore}</p>
           </div>
           <div><Swords size={24} color="#9ca3af" /></div>
           <div>
-            <div style={{fontSize: '40px'}}>{opponent.avatar}</div>
-            <h3>{opponent.name}</h3>
-            <p style={{fontSize: '24px', fontWeight: 'bold'}}>{oppScore}</p>
+            <div style={{fontSize: '40px'}} translate="no">{opponent.avatar}</div>
+            <h3 translate="no">{opponent.name}</h3>
+            <p style={{fontSize: '24px', fontWeight: 'bold'}} translate="no">{oppScore}</p>
           </div>
         </div>
 
         <div className="glass-card" style={{textAlign: 'left'}}>
           <h3>Recompensas Obtenidas</h3>
-          <p>💰 +{isWinner ? 50 : 10} Monedas</p>
-          <p>⭐ +{isWinner ? 100 : 20} XP</p>
-          <p>🏆 +{isWinner ? 25 : -10} Puntos de Liga</p>
+          <p>💰 <span style={{display: isWinner ? 'inline' : 'none'}}>+50 Monedas</span><span style={{display: !isWinner ? 'inline' : 'none'}}>+10 Monedas</span></p>
+          <p>⭐ <span style={{display: isWinner ? 'inline' : 'none'}}>+100 XP</span><span style={{display: !isWinner ? 'inline' : 'none'}}>+20 XP</span></p>
+          <p>🏆 <span style={{display: isWinner ? 'inline' : 'none'}}>+25 Puntos de Liga</span><span style={{display: !isWinner ? 'inline' : 'none'}}>-10 Puntos de Liga</span></p>
         </div>
 
         <button className="btn-primary" onClick={() => onFinish('duelo')}>Volver al Mundo</button>
@@ -151,7 +152,8 @@ export default function Duelo({ type, onFinish, userName = "Tú", userAvatar = "
       {phase === 'countdown' && (
         <div className="countdown-overlay">
           <div className="countdown-text">
-            {countdown > 0 ? countdown : '¡A desmentir!'}
+            <span style={{display: countdown > 0 ? 'inline' : 'none'}} translate="no">{countdown}</span>
+            <span style={{display: countdown === 0 ? 'inline' : 'none'}}>¡A desmentir!</span>
           </div>
         </div>
       )}
@@ -159,24 +161,24 @@ export default function Duelo({ type, onFinish, userName = "Tú", userAvatar = "
       {/* HUD Header */}
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px'}}>
         <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
-          <div style={{fontSize: '24px', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <div style={{fontSize: '24px', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center'}} translate="no">
             {userAvatar.startsWith('blob:') || userAvatar.startsWith('http') || userAvatar.startsWith('data:') 
               ? <img src={userAvatar} alt="avatar" style={{width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover'}} /> 
               : userAvatar}
           </div>
-          <div><h4 style={{margin: 0}}>{userName}</h4><p style={{margin: 0, fontSize: '14px', color: 'var(--primary)', fontWeight: 'bold'}}>{myScore}</p></div>
+          <div><h4 style={{margin: 0}} translate="no">{userName}</h4><p style={{margin: 0, fontSize: '14px', color: 'var(--primary)', fontWeight: 'bold'}} translate="no">{myScore}</p></div>
         </div>
         
         <div style={{textAlign: 'center'}}>
           <div style={{background: '#fef2f2', color: '#ef4444', padding: '6px 12px', borderRadius: '20px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px'}}>
-            <Clock size={16} /> {timeLeft}s
+            <Clock size={16} /> <span translate="no">{timeLeft}s</span>
           </div>
-          <span style={{fontSize: '12px', color: 'var(--text-muted)'}}>Ronda {round}/{totalRounds}</span>
+          <span style={{fontSize: '12px', color: 'var(--text-muted)'}}>Ronda <span translate="no">{round}/{totalRounds}</span></span>
         </div>
 
         <div style={{display: 'flex', alignItems: 'center', gap: '8px', textAlign: 'right'}}>
-          <div><h4 style={{margin: 0}}>{opponent.name}</h4><p style={{margin: 0, fontSize: '14px', fontWeight: 'bold'}}>{oppScore}</p></div>
-          <div style={{fontSize: '24px'}}>{opponent.avatar}</div>
+          <div><h4 style={{margin: 0}} translate="no">{opponent.name}</h4><p style={{margin: 0, fontSize: '14px', fontWeight: 'bold'}} translate="no">{oppScore}</p></div>
+          <div style={{fontSize: '24px'}} translate="no">{opponent.avatar}</div>
         </div>
       </div>
       

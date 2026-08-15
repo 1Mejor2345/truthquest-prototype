@@ -1,0 +1,605 @@
+%%
+%% TruthQuest — UNESCO Youth Hackathon 2026
+%% Official Proposal · Overleaf-ready (English Version)
+%% -------------------------------------------------------
+%% INSTRUCTIONS:
+%%   1. Create a blank project in Overleaf
+%%   2. Paste ALL this content into main.tex
+%%   3. Upload ALL .png images to the project root:
+%%      VILLAGE.png, LEARN.png, CHALLENGE.png, DUEL.png,
+%%      DUEL_RESULT.png, STORE.png, PROFILE.png, LOGIN.png,
+%%      DIAGRAM1_EN.png, DIAGRAM2_EN.png, DIAGRAM3_EN.png
+%%   4. Compile with pdfLaTeX
+%% -------------------------------------------------------
+
+\documentclass[11pt, a4paper]{article}
+
+% ── Packages ─────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{fontawesome5}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usetikzlibrary{calc, positioning, shadows.blur}
+
+% ── Geometry ────────────────────────────────────────────
+\geometry{a4paper, top=2cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+\setstretch{1.15}
+
+% ── Color Palette ────────────────────────────────────
+\definecolor{TQindigo}{HTML}{4F46E5}
+\definecolor{TQteal}{HTML}{10B981}
+\definecolor{TQamber}{HTML}{F59E0B}
+\definecolor{TQslate}{HTML}{1E293B}
+\definecolor{TQlight}{HTML}{F8FAFC}
+\definecolor{TQmuted}{HTML}{64748B}
+\definecolor{TQrose}{HTML}{E11D48}
+\definecolor{TQsky}{HTML}{0EA5E9}
+
+% ── Hyperref ─────────────────────────────────────────────
+\hypersetup{
+  colorlinks  = true,
+  linkcolor   = TQindigo,
+  urlcolor    = TQteal,
+  citecolor   = TQslate,
+  pdfauthor   = {TruthQuest Team},
+  pdftitle    = {TruthQuest – UNESCO Youth Hackathon 2026},
+  pdfsubject  = {MIL Prototype Proposal}
+}
+
+% ── Headers / Footers ───────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small\textcolor{TQmuted}{TruthQuest}}
+\fancyhead[R]{\small\textcolor{TQmuted}{UNESCO Youth Hackathon 2026}}
+\fancyfoot[C]{\small\textcolor{TQmuted}{\thepage}}
+
+% ── Titles ──────────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\color{TQslate}}
+  {\textcolor{TQindigo}{\thesection}}{0.8em}{}
+  [\vspace{-4pt}{\color{TQindigo}\rule{\linewidth}{1.2pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\color{TQslate}}
+  {\thesubsection}{0.6em}{}
+
+% ── Custom Boxes ────────────────────────────────
+\newtcolorbox{keybox}[1][]{
+  enhanced, breakable,
+  colback   = TQlight,
+  colframe  = TQindigo,
+  boxrule   = 0pt, 
+  leftrule  = 4pt,
+  arc       = 0pt,
+  left      = 12pt, right = 12pt,
+  top       = 8pt,  bottom = 8pt,
+  fontupper = \small,
+  #1
+}
+
+\newtcolorbox{accentbox}[1][]{
+  enhanced, breakable,
+  colback   = TQteal!5,
+  colframe  = TQteal,
+  boxrule   = 0pt, 
+  leftrule  = 4pt,
+  arc       = 0pt,
+  left      = 12pt, right = 12pt,
+  top       = 8pt,  bottom = 8pt,
+  fontupper = \small,
+  #1
+}
+
+\newtcolorbox{warnbox}[1][]{
+  enhanced, breakable,
+  colback   = TQamber!5,
+  colframe  = TQamber,
+  boxrule   = 0pt, 
+  leftrule  = 4pt,
+  arc       = 0pt,
+  left      = 12pt, right = 12pt,
+  top       = 8pt,  bottom = 8pt,
+  fontupper = \small,
+  #1
+}
+
+% ══════════════════════════════════════════════════════════
+% COVER PAGE
+% ══════════════════════════════════════════════════════════
+\begin{document}
+\thispagestyle{empty}
+
+\begin{tikzpicture}[remember picture, overlay]
+  % ── Gradient Background ──
+  \fill[TQslate] (current page.south west) rectangle (current page.north east);
+  % ── Left Sidebar ──
+  \fill[TQindigo] (current page.south west) rectangle ([xshift=8mm]current page.north west);
+  % ── Bottom Bar ──
+  \fill[TQteal] (current page.south west) rectangle ([yshift=6mm]current page.south east);
+  % ── Decorative Circles ──
+  \fill[TQindigo, opacity=0.15] ([xshift=12cm, yshift=8cm]current page.south west) circle (6cm);
+  \fill[TQteal, opacity=0.1]   ([xshift=4cm, yshift=14cm]current page.south west) circle (4cm);
+  \fill[TQamber, opacity=0.08] ([xshift=17cm, yshift=20cm]current page.south west) circle (3.5cm);
+\end{tikzpicture}
+
+\vspace*{3cm}
+
+\begin{center}
+  % ── Logo / Shield ──
+  {\fontsize{16}{18}\selectfont\textcolor{TQteal}{\faIcon{shield-alt}}}
+  \hspace{4pt}
+  {\fontsize{48}{52}\selectfont\textbf{\textcolor{white}{TruthQuest}}}
+
+  \vspace{8pt}
+  {\color{TQteal}\rule{6cm}{1.5pt}}
+
+  \vspace{12pt}
+  {\Large\textcolor{white!85}{Play Your Part: Youth Designing the Future of\\Media and Information Literacy}}
+
+  \vspace{2.5cm}
+
+  % ── Team Box (Alphabetical Order) ──
+  \begin{tcolorbox}[
+    enhanced,
+    colback   = white!8!TQslate,
+    colframe  = TQteal,
+    boxrule   = 1pt,
+    arc       = 6pt,
+    width     = 11cm,
+    left      = 14pt,
+    right     = 14pt,
+    top       = 12pt,
+    bottom    = 12pt,
+    center
+  ]
+    \centering
+    {\large\textcolor{TQteal}{\faIcon{users}}\;\;\textbf{\textcolor{white}{Team}}}\\[10pt]
+    \textcolor{white!90}{%
+      \begin{tabular}{l l}
+        \textcolor{TQteal}{\faIcon{user}} & Kevin Baque \\[4pt]
+        \textcolor{TQteal}{\faIcon{user}} & Bianka Lino \\[4pt]
+        \textcolor{TQteal}{\faIcon{user}} & Elina Ortiz \\[4pt]
+        \textcolor{TQteal}{\faIcon{user}} & José Paladines \\[4pt]
+        \textcolor{TQteal}{\faIcon{user}} & Andrea Verdezoto \\
+      \end{tabular}
+    }
+  \end{tcolorbox}
+
+  \vspace{2cm}
+  {\normalsize\textcolor{TQmuted}{UNESCO Youth Hackathon 2026 · Global MIL Week}}\\[4pt]
+  {\small\textcolor{TQmuted}{Athens, Greece · August 2026}}
+\end{center}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════
+% INDEX
+% ══════════════════════════════════════════════════════════
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════
+% 1 · EXECUTIVE SUMMARY
+% ══════════════════════════════════════════════════════════
+\section{Executive Summary}
+
+\begin{keybox}
+\textbf{TruthQuest} is a gamified mobile web application that turns Media and Information Literacy (MIL) into a competitive and social gaming experience. Users learn to detect disinformation, AI-generated content, bias, clickbait, and hate speech through micro-challenges with immediate educational feedback, real-time 1v1 duels, and collaborative community missions.
+\end{keybox}
+
+\noindent The educational core is \textbf{100\% free}, guaranteeing equity and inclusion regardless of the user's socioeconomic background. Monetization is based exclusively on optional visual cosmetics, creating zero barriers to learning.
+
+TruthQuest transforms the user from a passive consumer of information into a \textbf{"Digital Sage"}: an active agent who identifies, questions, and debunks disinformation both in the app and in their daily life.
+
+% ══════════════════════════════════════════════════════════
+% 2 · PROBLEM STATEMENT
+% ══════════════════════════════════════════════════════════
+\section{Problem Statement}
+
+\subsection{The Global Context}
+
+According to a global UNESCO survey (2023), \textbf{85\% of people} are concerned about the impact of online disinformation, and 87\% believe it has already had a significant effect on the political life of their countries. Youth aged 14 to 25—despite being digital natives—massively lack practical tools to discern fact from fiction in an ecosystem saturated with:
+
+\begin{itemize}[leftmargin=1.5cm, itemsep=4pt]
+  \item[\textcolor{TQrose}{\faIcon{robot}}] \textbf{AI-Generated Content} — deepfakes, synthetic images, automated texts.
+  \item[\textcolor{TQrose}{\faIcon{bullhorn}}] \textbf{Viral Disinformation} — fake news that spreads 6 times faster than the truth (MIT, 2018).
+  \item[\textcolor{TQrose}{\faIcon{comments}}] \textbf{Hate Speech \& Polarization} — echo chambers that reinforce cognitive biases.
+  \item[\textcolor{TQrose}{\faIcon{ad}}] \textbf{Clickbait \& Emotional Manipulation} — headlines designed to provoke reactions, not to inform.
+\end{itemize}
+
+\subsection{The Educational Gap}
+
+Existing media education programs are mostly \textbf{theoretical, academic, and unappealing} to new generations. The result: low retention rates and almost zero impact on the young person's actual behavior when browsing social networks.
+
+\begin{warnbox}
+\textbf{Key Fact:} 86\% of global internet users admit to having been fooled by fake news at least once (CIGI-Ipsos, 2019). Among 16-24 year olds, continuous exposure to visual platforms makes them especially vulnerable to synthetic content and deepfakes.
+\end{warnbox}
+
+% ══════════════════════════════════════════════════════════
+% 3 · TARGET AUDIENCE & INCLUSION
+% ══════════════════════════════════════════════════════════
+\section{Target Audience and Inclusion}
+
+\begin{center}
+\begin{tabularx}{0.92\textwidth}{>{\centering\arraybackslash}p{2.8cm} X}
+\toprule
+\textbf{Segment} & \textbf{Description} \\
+\midrule
+\textcolor{TQindigo}{\faIcon{graduation-cap}} \textbf{Primary} & Youth aged 14-25, active users of social networks (TikTok, Instagram, WhatsApp, X), who consume fast content and need to develop critical thinking. \\[6pt]
+\textcolor{TQteal}{\faIcon{chalkboard-teacher}} \textbf{Secondary} & Teachers and facilitators who can integrate TruthQuest as a pedagogical resource in the classroom, extending MIL reach into formal environments. \\[6pt]
+\textcolor{TQamber}{\faIcon{globe-americas}} \textbf{Marginalized} & Offline-first design, low data consumption, and built-in universal language support to guarantee access in rural areas with limited connectivity. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Universal Accessibility: Breaking the Language Barrier}
+
+A truly global MIL solution must transcend language and visual limitations. Aligning closely with UNESCO's mandate for universal education, TruthQuest integrates two groundbreaking accessibility pillars directly into its core architecture:
+
+\begin{accentbox}
+\textbf{\faIcon{universal-access}\; The Six Official UNESCO Languages \& Real-Time TTS}
+\begin{itemize}[leftmargin=1cm, itemsep=2pt, topsep=4pt]
+  \item \textbf{Global Translation Engine:} With a single tap, the entire application interface translates instantly into the six official UNESCO languages: \textbf{English, French, Spanish, Arabic, Chinese, and Russian}. Our dynamic React DOM is engineered to maintain perfect layout integrity across all alphabets, including Right-to-Left (RTL) scripts.
+  \item \textbf{Immersive Text-to-Speech (TTS):} An integrated Web Audio API synthesizer allows visually impaired users, or auditory learners, to hover over or tap any text on the screen to have the content read aloud. 
+  \item \textbf{Zero-Latency Sound Design:} Native browser audio APIs provide instant, subtle UI feedback (clicks, correct/incorrect chimes, coin drops) to enhance cognitive retention and engagement without relying on heavy media files, making it ideal for low-bandwidth environments.
+\end{itemize}
+\end{accentbox}
+
+% ══════════════════════════════════════════════════════════
+% 4 · THE SOLUTION: TRUTHQUEST
+% ══════════════════════════════════════════════════════════
+\section{The Solution: TruthQuest}
+
+\subsection{Core Concept}
+
+TruthQuest is not a course disguised as an application. It is a \textbf{game at its core} that utilizes the principles of learning psychology (immediate feedback, visible progression, social competition) to forge critical thinking habits that transcend the screen.
+
+\subsection{User Experience Flow}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15.5cm]{DIAGRAMA1_EN.png}
+  \caption{Complete User Experience flow in TruthQuest.}
+\end{figure}
+
+\subsection{The Five Pillars}
+
+The application is structured into five interconnected modules, each with a specific role in the learning experience:
+
+\vspace{8pt}
+
+% ── Pillar 1: World ──
+\noindent
+\begin{tcolorbox}[enhanced, colback=white, colframe=TQindigo!20, boxrule=0.5pt, arc=4pt, left=10pt, right=10pt, top=6pt, bottom=6pt]
+\textcolor{TQindigo}{\faIcon{globe}\;\textbf{1. World — Visual Progression}}\\[4pt]
+The player owns a \textbf{Digital Village} that evolves as they learn. 
+\begin{center}
+  \includegraphics[height=7cm]{VILLAGE.png}
+  \captionof{figure}{World Screen: village-style progression map with unlockable nodes.}
+\end{center}
+\end{tcolorbox}
+
+\vspace{4pt}
+
+% ── Pillar 2: Learn ──
+\noindent
+\begin{tcolorbox}[enhanced, colback=white, colframe=TQteal!20, boxrule=0.5pt, arc=4pt, left=10pt, right=10pt, top=6pt, bottom=6pt]
+\textcolor{TQteal}{\faIcon{book-open}\;\textbf{2. Learn — Micro-Challenges with Feedback}}\\[4pt]
+Instead of theoretical lessons, the user faces real dubious content: a sensationalist headline, an AI-generated image, a viral WhatsApp message. They must make a decision and receive an \textbf{immediate educational explanation}, whether they guess right or wrong. The learning cycle is illustrated in Figure~\ref{fig:cycle}.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[height=6.5cm]{LEARN.png}
+    \caption{Training categories.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[height=6.5cm]{CHALLENGE.png}
+    \caption{Micro-challenge with real content.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.32\textwidth}
+    \centering
+    \includegraphics[height=6.5cm]{DIAGRAMA3_EN.png}
+    \caption{Pedagogical Feedback Cycle.}
+    \label{fig:cycle}
+  \end{subfigure}
+  \caption{The Learn module: category selection, challenge in action, and pedagogical cycle.}
+\end{figure}
+\end{tcolorbox}
+
+\vspace{4pt}
+
+% ── Pillar 3: Duel ──
+\noindent
+\begin{tcolorbox}[enhanced, colback=white, colframe=TQrose!20, boxrule=0.5pt, arc=4pt, left=10pt, right=10pt, top=6pt, bottom=6pt]
+\textcolor{TQrose}{\faIcon{gamepad}\;\textbf{3. 1v1 Duel — Social Competition}}\\[4pt]
+Two players analyze the same content simultaneously in 3 rounds of 10 seconds each. Scoring combines \textbf{accuracy + speed}. The competitive mechanic turns fact-checking into a viral and social experience, encouraging users to invite their peers.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[height=6.5cm]{DUEL.png}
+    \caption{Duel in action: Round 2 of 3.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[height=6.5cm]{DUEL_RESULT.png}
+    \caption{Victory and rewards screen.}
+  \end{subfigure}
+  \caption{Duel Mode: real-time competition with rewards for victory.}
+\end{figure}
+\end{tcolorbox}
+
+\vspace{4pt}
+
+% ── Pillar 4: Store ──
+\noindent
+\begin{tcolorbox}[enhanced, colback=white, colframe=TQamber!20, boxrule=0.5pt, arc=4pt, left=10pt, right=10pt, top=6pt, bottom=6pt]
+\textcolor{TQamber}{\faIcon{store}\;\textbf{4. Store — Ethical Freemium Model}}\\[4pt]
+Users earn coins by playing and can purchase cosmetics to customize their village (Lighthouse of Truth, Central Library) and claim daily rewards. MIL education is \textbf{never} locked behind a paywall.
+\begin{center}
+  \includegraphics[height=6.5cm]{STORE.png}
+  \captionof{figure}{Store: daily reward, village cosmetics, and coin system.}
+\end{center}
+\end{tcolorbox}
+
+\vspace{4pt}
+
+% ── Pillar 5: Profile ──
+\noindent
+\begin{tcolorbox}[enhanced, colback=white, colframe=TQmuted!20, boxrule=0.5pt, arc=4pt, left=10pt, right=10pt, top=6pt, bottom=6pt]
+\textcolor{TQslate}{\faIcon{user-circle}\;\textbf{5. Profile — Personal Analytics}}\\[4pt]
+Individual dashboard with accuracy statistics (87\%), victories (42), best streak (15), completed challenges (156), league level, and badges ("Artificial Eye" — AI detected 50 times). Allows the user to \textbf{measure their own growth} as a critical thinker.
+\begin{center}
+  \includegraphics[height=6.5cm]{PROFILE.png}
+  \captionof{figure}{Profile: stats, league, level, and badge system.}
+\end{center}
+\end{tcolorbox}
+
+% ══════════════════════════════════════════════════════════
+% 5 · ACCESS & LOGIN
+% ══════════════════════════════════════════════════════════
+\section{Universal Access}
+
+TruthQuest offers two access modes to minimize barriers:
+
+\begin{itemize}[leftmargin=1.5cm, itemsep=4pt]
+  \item \textbf{Profile Registration:} The user creates a name and chooses an avatar. Their progress is saved, and they can compete in leagues.
+  \item \textbf{Guest Mode:} Immediate access without registration, ideal for first contacts or contexts where users are minors.
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=7cm]{LOGIN.png}
+  \caption{Home screen: profile registration or guest access.}
+\end{figure}
+
+% ══════════════════════════════════════════════════════════
+% 6 · HACKATHON THEME ALIGNMENT
+% ══════════════════════════════════════════════════════════
+\section{Alignment with the Hackathon Theme}
+
+The theme of the 2026 edition is \textbf{"Play Your Part: Youth Designing the Future of Media and Information Literacy"}. TruthQuest literally embodies this call:
+
+\begin{center}
+\begin{tabularx}{0.92\textwidth}{>{\centering\arraybackslash}p{3.2cm} X}
+\toprule
+\textbf{Theme Element} & \textbf{How TruthQuest materializes it} \\
+\midrule
+\textit{Play Your Part} & The name itself invites you to "play your part". Every completed challenge is an act of defense against disinformation. \\[6pt]
+\textit{Youth Designing} & Designed \textbf{by} youth, \textbf{for} youth. The language, aesthetics, and mechanics are calibrated for Gen Z. \\[6pt]
+\textit{Future of MIL} & Introduces generative AI as an object of study (not just a tool), positioning MIL at the technological frontier. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ══════════════════════════════════════════════════════════
+% 7 · CREATIVITY & INNOVATION
+% ══════════════════════════════════════════════════════════
+\section{Creativity and Innovation}
+
+\begin{keybox}
+Unlike existing solutions (video courses, PDF booklets, in-person workshops), TruthQuest innovates in three simultaneous dimensions:
+\end{keybox}
+
+\begin{enumerate}[leftmargin=1.5cm, itemsep=8pt]
+  \item \textbf{Learning by Discovery, Not by Instruction}\\
+  The user does not receive a lecture: they face real content and make decisions. Mistakes become pedagogical opportunities, not punishments. This replicates the real social media environment where youth must decide in seconds if something is true or false.
+
+  \item \textbf{Meaningful Gamification}\\
+  It's not about "adding points to a course". The progression system (Digital Village, XP, streaks, badges) is designed with principles of \textit{Self-Determination Theory}: autonomy (the player chooses their path), competence (immediate feedback), and social relatedness (duels and community missions).
+
+  \item \textbf{Real-Time Community Missions}\\
+  Global challenges where the entire user community collaborates to "debunk" a real disinformation campaign. This creates collective awareness and transforms MIL from an individual exercise into a social movement.
+\end{enumerate}
+\newpage
+
+% ══════════════════════════════════════════════════════════
+% 8 · TECHNICAL VIABILITY
+% ══════════════════════════════════════════════════════════
+\section{Technical and Practical Viability}
+
+\subsection{System Architecture}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.65\textwidth]{DIAGRAMA2_EN.png}
+  \caption{Technical Architecture: Frontend (React + Vite), Modules, Backend (Firebase)}
+\end{figure}
+
+\subsection{Technology Stack}
+
+\begin{center}
+\begin{tabularx}{0.88\textwidth}{l X}
+\toprule
+\textbf{Layer} & \textbf{Technology} \\
+\midrule
+Frontend       & React + Vite (functional prototype deployed) \\
+Distribution   & Progressive Web App (PWA) — runs natively on iOS, Android, and desktop \\
+Accessibility  & Web Audio API (TTS \& SFX) + Google Translate Engine (6 UNESCO Languages) \\
+Future Backend & Node.js + Firebase (auth, real-time database, matchmaking) \\
+Content        & Curated question bank + future integration with fact-checking APIs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Current Prototype Status}
+
+The prototype is \textbf{fully functional} and deployed in production:
+
+\begin{accentbox}
+\textcolor{TQteal}{\faIcon{globe}}\;\textbf{Live Demo:} \url{https://truthquest-prototype.onrender.com}\\[4pt]
+\textcolor{TQteal}{\faIcon{code-branch}}\;\textbf{Source Code:} \url{https://github.com/1Mejor2345/truthquest-prototype}
+\end{accentbox}
+
+\noindent\textbf{Implemented Features:}
+\begin{itemize}[leftmargin=1.5cm, itemsep=2pt]
+  \item Login system with customizable profiles (name + emoji avatar).
+  \item Native multilingual support (English, French, Spanish, Arabic, Chinese, Russian) + Text-to-Speech.
+  \item Four micro-challenge categories with educational feedback.
+  \item 1v1 Duel with simulated matchmaking, timer, and score table.
+  \item Village-style progression map with unlockable nodes.
+  \item Cosmetics store with coin system and daily reward.
+  \item Profile dashboard with stats, leagues, and badges.
+\end{itemize}
+
+\subsection{Roadmap}
+
+\begin{center}
+\begin{tabularx}{0.88\textwidth}{c X}
+\toprule
+\textbf{Phase} & \textbf{Description} \\
+\midrule
+\textcolor{TQteal}{\faIcon{check-circle}} \textbf{Current} & Functional prototype deployed. Full interactive demo featuring universal translation and audio accessibility. \\[4pt]
+\textcolor{TQamber}{\faIcon{clock}} \textbf{3 months} & Real backend with Firebase. Multiplayer matchmaking. Focus group testing with university students (50-100 users). \\[4pt]
+\textcolor{TQindigo}{\faIcon{rocket}} \textbf{6 months} & PWA Publication. Integration with fact-checking APIs (AFP, Snopes, Chequeado). Expanding the content library. \\[4pt]
+\textcolor{TQrose}{\faIcon{globe-americas}} \textbf{12 months} & Global Launch. Alliances with universities and international verification organizations. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ══════════════════════════════════════════════════════════
+% 9 · SUSTAINABILITY
+% ══════════════════════════════════════════════════════════
+\section{Long-Term Sustainability}
+
+\begin{keybox}
+TruthQuest is designed to be sustainable without relying on continuous external funding, utilizing an ethical revenue model that never compromises the educational mission.
+\end{keybox}
+
+\begin{center}
+\begin{tabularx}{0.88\textwidth}{>{\centering\arraybackslash}p{3cm} X}
+\toprule
+\textbf{Revenue Source} & \textbf{Details} \\
+\midrule
+\faIcon{palette}\;\textbf{Cosmetics} & Optional in-app purchases: village decorations (Lighthouse of Truth, Central Library), avatars, and visual effects. Purely aesthetic. \\[6pt]
+\faIcon{handshake}\;\textbf{Alliances} & Sponsorships from NGOs, educational foundations, and verification agencies to fund in-app campaigns or content. \\[6pt]
+\faIcon{university}\;\textbf{Licensing} & Institutional version with a teacher dashboard to track students' MIL progress in a classroom setting. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Content Sustainability}
+
+\begin{itemize}[leftmargin=1.5cm, itemsep=2pt]
+  \item \textbf{Expert Curation:} Alliances with fact-checking organizations.
+  \item \textbf{Community-Generated Content:} Advanced users will be able to propose challenges, reviewed by moderators.
+  \item \textbf{Real-Time Integration:} Community Missions are based on real disinformation campaigns happening in the world at that exact moment.
+\end{itemize}
+
+% ══════════════════════════════════════════════════════════
+% 10 · SOCIAL IMPACT
+% ══════════════════════════════════════════════════════════
+\section{Social Impact}
+
+\subsection{Impact Metrics}
+
+\begin{center}
+\begin{tabularx}{0.88\textwidth}{>{\centering\arraybackslash}p{3.5cm} X}
+\toprule
+\textbf{Metric} & \textbf{How it is measured} \\
+\midrule
+\textbf{MIL Accuracy} & Increase in the user's correct answer percentage over time (analytics integrated into the Profile, currently 87\%). \\[6pt]
+\textbf{Ripple Effect} & Number of duels played with friends — each duel means one more peer exposed to MIL education. \\[6pt]
+\textbf{Community Reach} & Active participants in Community Missions — indicator of collective awareness. \\[6pt]
+\textbf{Retention} & Daily return rate. Gamification ensures users come back, unlike traditional courses with 5-10\% completion rates. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Theory of Change}
+
+\begin{accentbox}
+\textbf{If} we equip youth with practical and immersive tools to identify disinformation,\\
+\textbf{then} they will not only stop sharing fake content,\\
+\textbf{but} they will become active agents warning their peers and families,\\
+\textbf{creating} a ripple effect of media literacy that transcends the screen.
+\end{accentbox}
+
+% ══════════════════════════════════════════════════════════
+% 11 · ALIGNMENT WITH UNESCO VALUES
+% ══════════════════════════════════════════════════════════
+\section{Alignment with UNESCO Values}
+
+\begin{center}
+\begin{tabularx}{0.88\textwidth}{>{\centering\arraybackslash}p{3.2cm} X}
+\toprule
+\textbf{UNESCO Value} & \textbf{How TruthQuest promotes it} \\
+\midrule
+\faIcon{dove}\;\textbf{Peace} & The Digital Empathy module teaches how to identify and disarm hate speech, promoting constructive dialogue. \\[6pt]
+\faIcon{users}\;\textbf{Diversity \& Inclusion} & 100\% free education model. Accessible design with integrated TTS. Seamless translation into the 6 official UNESCO languages. \\[6pt]
+\faIcon{comments}\;\textbf{Freedom of Expression} & TruthQuest does not censor: it teaches users to \textit{evaluate} information for themselves, strengthening critical autonomy. \\[6pt]
+\faIcon{balance-scale}\;\textbf{Equity} & No educational paywalls. Guest mode without registration. Offline-first design planned for global reach. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ══════════════════════════════════════════════════════════
+% 12 · REFERENCES
+% ══════════════════════════════════════════════════════════
+\section{References}
+
+\begin{itemize}[leftmargin=1.5cm, itemsep=4pt]
+  \item \textbf{UNESCO (2023).} \textit{Survey on the impact of online disinformation and hate speech.} Conducted by Ipsos across 16 countries.
+  \item \textbf{Vosoughi, S., Roy, D., \& Aral, S. (2018).} \textit{The spread of true and false news online.} Science, 359(6380), 1146-1151. (MIT study on viral spread).
+  \item \textbf{CIGI-Ipsos (2019).} \textit{Global Survey on Internet Security and Trust.} Centre for International Governance Innovation.
+\end{itemize}
+
+% ══════════════════════════════════════════════════════════
+% CLOSING
+% ══════════════════════════════════════════════════════════
+\vspace{1.5cm}
+\begin{center}
+  {\color{TQindigo}\rule{4cm}{1pt}}\\[16pt]
+  {\huge\textcolor{TQslate}{\textit{``Truth does not defend itself.}}}\\[8pt]
+  {\huge\textcolor{TQslate}{\textit{It is defended by playing.}}}\\[8pt]
+  {\huge\textbf{\textcolor{TQindigo}{\textit{Play Your Part.''}}}}\\[16pt]
+  {\color{TQindigo}\rule{4cm}{1pt}}
+\end{center}
+
+\end{document}
