@@ -17,6 +17,20 @@ const MOCK_QUESTIONS = {
       options: ["Generada por IA", "Totalmente real", "Manipulada con Photoshop"],
       correct: 1,
       explanation: "Es una fotografía real. Los detalles en las sombras, la coherencia de las letras en los carteles del fondo y la proporción de las manos son consistentes."
+    },
+    {
+      img: "/assets/ia_deepfake_face.jpg",
+      question: "¿Este presentador de noticias es una persona real?",
+      options: ["Sí, es un presentador", "No, es un Deepfake (IA)", "Es una animación 3D"],
+      correct: 1,
+      explanation: "¡Atención a los detalles! La mano que sostiene el micrófono tiene proporciones extrañas (un error común en IA), y el texto en la barra inferior carece de sentido legible."
+    },
+    {
+      img: "/assets/ia_impossible_landscape.jpg",
+      question: "¿Es este un paisaje natural que podrías visitar?",
+      options: ["Sí, en Noruega", "No, fue creado por IA", "Es una pintura al óleo"],
+      correct: 1,
+      explanation: "El paisaje contiene geometrías imposibles: un río que fluye hacia el cielo y reflejos en el agua que no corresponden a la montaña real. Errores típicos de generación de imágenes."
     }
   ],
   desinfo: [
@@ -34,6 +48,20 @@ const MOCK_QUESTIONS = {
       options: ["Falsa, es clickbait", "Sí, es información neutral", "Es un engaño"],
       correct: 1,
       explanation: "El titular es neutral, describe un hecho concreto de forma objetiva sin apelar a emociones extremas. Aún así, siempre se debe verificar en medios oficiales."
+    },
+    {
+      text: "Cadena de WhatsApp: '¡Alerta! Si respondes a este número te robarán todos los datos del banco por WiFi.'",
+      question: "¿Qué debes hacer al recibir este mensaje?",
+      options: ["Reenviarlo para avisar a todos", "Ignorarlo, es un bulo (Fake News)", "Apagar el WiFi inmediatamente"],
+      correct: 1,
+      explanation: "Las cadenas alarmistas por WhatsApp suelen ser bulos diseñados para causar pánico. Técnicamente es imposible que te roben datos del banco solo por responder un mensaje."
+    },
+    {
+      img: "/assets/desinfo_shark_street.jpg",
+      question: "¿Esta foto de un tiburón nadando en una calle inundada es real?",
+      options: ["Sí, ocurrió en un huracán", "No, es un montaje/engaño viral", "Ocurrió en Australia"],
+      correct: 1,
+      explanation: "Esta es una de las imágenes falsas más compartidas durante los huracanes. Siempre se usa el mismo tiburón superpuesto en diferentes calles inundadas."
     }
   ],
   fuentes: [
@@ -44,6 +72,20 @@ const MOCK_QUESTIONS = {
       options: ["Sí, dice 'reales'", "No, la URL no es confiable", "Solo si tiene muchas visitas"],
       correct: 1,
       explanation: "Los dominios como '.blogspot' o con números aleatorios suelen ser blogs personales sin control editorial. Es mejor buscar dominios .edu, .gov, o medios reconocidos."
+    },
+    {
+      text: "Tweet de @Real_News_123: '¡El presidente acaba de renunciar! Fuente: Créanme.'",
+      question: "¿Deberías creer esta información?",
+      options: ["No, falta fuente verificable", "Sí, si tiene muchos likes", "Sí, está en Twitter"],
+      correct: 0,
+      explanation: "Una cuenta sin verificación real, con un nombre de usuario genérico y que no proporciona enlaces a comunicados oficiales no es una fuente confiable."
+    },
+    {
+      img: "/assets/fuentes_sketchy_blog.jpg",
+      question: "¿Comprarías un suplemento de salud basado en esta página web?",
+      options: ["Sí, dice que es un milagro", "No, luce poco profesional y sospechosa", "Solo si está barato"],
+      correct: 1,
+      explanation: "El uso excesivo de mayúsculas, colores chillones, promesas de 'curas milagrosas' y anuncios intrusivos son banderas rojas de una fuente médica no confiable y posible estafa."
     }
   ],
   empatia: [
@@ -61,11 +103,25 @@ const MOCK_QUESTIONS = {
       options: ["Sí, promueve el debate sano", "No, ataca al autor", "Es discurso de odio"],
       correct: 0,
       explanation: "Critica la idea, no a la persona. Expresa desacuerdo de manera respetuosa e invita a reflexionar, lo cual es clave para la empatía digital."
+    },
+    {
+      text: "Comentario en redes: 'Wow, te ves horrible en esa foto, deberías borrar tus redes sociales.'",
+      question: "¿Qué fenómeno digital representa esto?",
+      options: ["Ciberacoso (Cyberbullying)", "Crítica constructiva", "Libertad de expresión"],
+      correct: 0,
+      explanation: "Atacar el aspecto físico de alguien con la intención de herir u obligar a abandonar una plataforma es una forma clara de ciberacoso que destruye la empatía."
+    },
+    {
+      text: "Respuesta a un troll: 'No estoy de acuerdo contigo, pero espero que tengas un buen día.'",
+      question: "¿Esta respuesta es recomendable?",
+      options: ["No, deberías insultarlo", "Sí, desescala la situación", "No, debes darle la razón"],
+      correct: 1,
+      explanation: "Responder con cortesía y retirarse de la conversación es la mejor manera de 'no alimentar al troll' y mantener la empatía digital sin entrar en peleas innecesarias."
     }
   ]
 }
 
-export default function Desafio({ category, onFinish }) {
+export default function Desafio({ category, onFinish, onBack }) {
   const [currentIdx, setCurrentIdx] = useState(0)
   const [selectedOpt, setSelectedOpt] = useState(null)
   const [showFeedback, setShowFeedback] = useState(false)
@@ -122,6 +178,16 @@ export default function Desafio({ category, onFinish }) {
             ))}
           </div>
         </div>
+      </div>
+
+      <div style={{marginTop: 'auto', paddingTop: '16px'}}>
+        <button 
+          className="btn-secondary" 
+          onClick={onBack}
+          style={{width: '100%', borderColor: 'transparent'}}
+        >
+          Volver al Menú
+        </button>
       </div>
 
       {/* Feedback Modal Overlay */}

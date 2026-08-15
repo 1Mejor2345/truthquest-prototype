@@ -10,18 +10,12 @@
       /* Esconder la barra superior de Google Translate */
       .skiptranslate iframe { display: none !important; }
       body { top: 0 !important; }
-      #google_translate_element select {
-        padding: 4px;
-        border-radius: 8px;
-        border: 1px solid #cbd5e1;
-        background: white;
-        font-family: inherit;
-        font-size: 12px;
-        max-width: 100px;
+      #google_translate_element {
+        display: none !important;
       }
       .goog-te-gadget {
         font-family: inherit !important;
-        font-size: 0px !important; /* hide powered by google text */
+        font-size: 0px !important;
         color: transparent !important;
       }
       .goog-te-gadget img {
@@ -30,7 +24,7 @@
     </style>
   </head>
   <body>
-    <div id="google_translate_element" style="position: absolute; top: 16px; right: 16px; z-index: 99999;"></div>
+    <div id="google_translate_element"></div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

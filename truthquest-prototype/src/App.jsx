@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Home, BookOpen, Swords, Gift, User, Heart, Coins, Zap, Shield, X, Volume2, VolumeX } from 'lucide-react'
+import { Home, BookOpen, Swords, Gift, User, Heart, Coins, Zap, Shield, X, Volume2, VolumeX, Globe } from 'lucide-react'
 import Mundo from './components/Mundo'
 import Aprender from './components/Aprender'
 import Desafio from './components/Desafio'
@@ -13,6 +13,7 @@ function App() {
   const [activeTab, setActiveTab] = useState('mundo')
   const [currentChallenge, setCurrentChallenge] = useState(null)
   const [voiceEnabled, setVoiceEnabled] = useState(false)
+  const [showLangModal, setShowLangModal] = useState(false)
   
   // Voice Synthesis Effect
   useEffect(() => {
@@ -44,6 +45,11 @@ function App() {
   
   // Google Translate Effect
   useEffect(() => {
+    // Default to English if no translation cookie is set
+    if (!document.cookie.includes('googtrans=')) {
+      document.cookie = "googtrans=/es/en; path=/";
+    }
+
     if (!window.googleTranslateElementInit) {
       window.googleTranslateElementInit = () => {
         if (window.google && window.google.translate) {
@@ -151,6 +157,15 @@ function App() {
     setShowBuyModal(false)
   }
 
+  const handleLanguageChange = (langCode) => {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      select.value = langCode;
+      select.dispatchEvent(new Event('change'));
+    }
+    setShowLangModal(false);
+  }
+
   const handleLogout = () => {
     setAuthMode('login')
   }
@@ -174,6 +189,21 @@ function App() {
             </div>
             
             <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
+              <button 
+                onClick={() => setShowLangModal(true)}
+                style={{
+                  background: 'var(--surface)',
+                  color: 'var(--primary)',
+                  border: '1px solid var(--primary)',
+                  borderRadius: '50%',
+                  width: '32px', height: '32px',
+                  display: 'flex', justifyContent: 'center', alignItems: 'center',
+                  cursor: 'pointer'
+                }}
+                title="Cambiar idioma"
+              >
+                <Globe size={16} />
+              </button>
               <button 
                 onClick={() => setVoiceEnabled(!voiceEnabled)}
                 style={{
@@ -212,6 +242,7 @@ function App() {
             <Desafio 
               category={currentChallenge.category} 
               onFinish={handleFinishChallenge} 
+              onBack={() => setCurrentChallenge(null)}
             />
           )}
           
@@ -338,6 +369,29 @@ function App() {
               </button>
             </div>
             <p style={{fontSize: '12px', textAlign: 'center', color: 'var(--text-muted)'}}>Este dinero apoya la educación gratuita para todos. Modelo Freemium.</p>
+          </div>
+        </div>
+      )}
+
+      {showLangModal && (
+        <div className="modal-overlay" style={{opacity: 1, zIndex: 500}}>
+          <div className="modal-content">
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
+              <h2 style={{margin: 0}}>Idioma / Language</h2>
+              <button style={{background: 'none', border: 'none', cursor: 'pointer'}} onClick={() => setShowLangModal(false)}>
+                <X size={24} />
+              </button>
+            </div>
+            
+            <div style={{display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px'}}>
+              <button className="btn-secondary" onClick={() => handleLanguageChange('es')}>🇪🇸 Español</button>
+              <button className="btn-secondary" onClick={() => handleLanguageChange('en')}>🇬🇧 English</button>
+              <button className="btn-secondary" onClick={() => handleLanguageChange('fr')}>🇫🇷 Français</button>
+              <button className="btn-secondary" onClick={() => handleLanguageChange('ar')}>🇸🇦 العربية</button>
+              <button className="btn-secondary" onClick={() => handleLanguageChange('zh-CN')}>🇨🇳 中文</button>
+              <button className="btn-secondary" onClick={() => handleLanguageChange('ru')}>🇷🇺 Русский</button>
+            </div>
+            <p style={{fontSize: '12px', textAlign: 'center', color: 'var(--text-muted)'}}>Idiomas oficiales de la UNESCO</p>
           </div>
         </div>
       )}
