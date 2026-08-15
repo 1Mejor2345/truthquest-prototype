@@ -35,7 +35,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
   margin: 0;
   color: var(--text-main);
   background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
