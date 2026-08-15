@@ -6,25 +6,50 @@ import Desafio from './components/Desafio'
 import Duelo from './components/Duelo'
 import Perfil from './components/Perfil'
 import Recompensas from './components/Recompensas'
+import Login from './components/Login'
 import './index.css'
 
 function App() {
   const [activeTab, setActiveTab] = useState('mundo')
   const [currentChallenge, setCurrentChallenge] = useState(null)
   
+  // Auth State
+  const [authMode, setAuthMode] = useState('login') // 'login', 'app'
+  const [isGuest, setIsGuest] = useState(false)
+
   // Game State
-  const [coins, setCoins] = useState(150)
-  const [streak, setStreak] = useState(3)
+  const [coins, setCoins] = useState(0)
+  const [streak, setStreak] = useState(0)
   const [lives, setLives] = useState(5)
-  const [xp, setXp] = useState(2500)
+  const [xp, setXp] = useState(0)
   const [inventory, setInventory] = useState({})
   
   // User Profile State
-  const [userName, setUserName] = useState('Gamer_Mundo2026')
+  const [userName, setUserName] = useState('')
   const [userAvatar, setUserAvatar] = useState('😎')
   
   // Global Modals
   const [showBuyModal, setShowBuyModal] = useState(false)
+
+  const handleLogin = (name, avatar, guest) => {
+    setIsGuest(guest);
+    setUserName(name);
+    setUserAvatar(avatar);
+    
+    if (guest) {
+      setCoins(0);
+      setXp(0);
+      setStreak(0);
+      setLives(5);
+    } else {
+      setCoins(150);
+      setXp(2500);
+      setStreak(3);
+      setLives(5);
+    }
+    
+    setAuthMode('app');
+  }
 
   const handleStartChallenge = (category) => {
     setCurrentChallenge({ category, mode: 'aprender' })
@@ -54,6 +79,14 @@ function App() {
   const handleBuyCoins = (amount) => {
     setCoins(c => c + amount)
     setShowBuyModal(false)
+  }
+
+  if (authMode === 'login') {
+    return (
+      <div className="mobile-container">
+        <Login onLogin={handleLogin} />
+      </div>
+    )
   }
 
   return (

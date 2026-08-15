@@ -91,7 +91,7 @@ export default function Desafio({ category, onFinish }) {
   }
 
   return (
-    <div className="animate-slide-up" style={{height: '100%', display: 'flex', flexDirection: 'column'}}>
+    <div className="animate-slide-up" style={{flex: 1, display: 'flex', flexDirection: 'column'}}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px', alignItems: 'center' }}>
         <h2 style={{margin:0}}>Desafío</h2>
         <span style={{fontSize: '14px', color: 'var(--text-muted)'}}>Ronda {(currentIdx % questions.length) + 1}</span>

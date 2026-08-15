@@ -146,7 +146,7 @@ export default function Duelo({ type, onFinish, userName = "Tú", userAvatar = "
   }
 
   return (
-    <div className="animate-slide-up" style={{display: 'flex', flexDirection: 'column', height: '100%', position: 'relative'}}>
+    <div className="animate-slide-up" style={{flex: 1, display: 'flex', flexDirection: 'column', position: 'relative'}}>
       {/* Countdown Overlay */}
       {phase === 'countdown' && (
         <div className="countdown-overlay">
@@ -187,7 +187,7 @@ export default function Duelo({ type, onFinish, userName = "Tú", userAvatar = "
 
       {/* Question Card */}
       <div className="challenge-card" style={{flex: 1, border: '2px solid var(--primary-light)', marginBottom: '0'}}>
-        <img src={question.img} alt="Desafío visual" className="challenge-img duel-img" style={{height: '100px', minHeight: '100px'}} />
+        <img src={question.img} alt="Desafío visual" className="challenge-img duel-img" />
         
         <div className="challenge-content" style={{padding: '12px 16px', flex: 1, overflowY: 'auto'}}>
           <p style={{fontStyle: 'italic', marginBottom: '8px', fontSize: '14px', color: '#374151'}}>"{question.text}"</p>
