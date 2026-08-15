@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Home, BookOpen, Swords, Gift, User, Heart, Coins, Zap, Shield, X } from 'lucide-react'
 import Mundo from './components/Mundo'
 import Aprender from './components/Aprender'
@@ -12,6 +12,23 @@ import './index.css'
 function App() {
   const [activeTab, setActiveTab] = useState('mundo')
   const [currentChallenge, setCurrentChallenge] = useState(null)
+  
+  // Responsive Scale Effect
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 480) {
+        document.documentElement.style.setProperty('--app-scale', 1);
+      } else {
+        const scaleH = (window.innerHeight * 0.95) / 812;
+        const scaleW = (window.innerWidth * 0.95) / 375;
+        const scale = Math.min(scaleH, scaleW, 1);
+        document.documentElement.style.setProperty('--app-scale', scale);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   // Auth State
   const [authMode, setAuthMode] = useState('login') // 'login', 'app'
