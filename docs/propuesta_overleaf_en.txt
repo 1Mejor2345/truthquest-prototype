@@ -498,8 +498,9 @@ Content        & Curated question bank + future integration with fact-checking A
 The prototype is \textbf{fully functional} and deployed in production:
 
 \begin{accentbox}
+\textcolor{TQrose}{\faIcon{youtube}}\;\textbf{Pitch \& Demo Video:} \url{https://youtu.be/7PSYmjF7up0}\\[4pt]
 \textcolor{TQteal}{\faIcon{globe}}\;\textbf{Live Demo:} \url{https://truthquest-prototype.onrender.com}\\[4pt]
-\textcolor{TQteal}{\faIcon{code-branch}}\;\textbf{Source Code:} \url{https://github.com/1Mejor2345/truthquest-prototype}
+\textcolor{TQslate}{\faIcon{github}}\;\textbf{Source Code:} \url{https://github.com/1Mejor2345/truthquest-prototype}
 \end{accentbox}
 
 \noindent\textbf{Implemented Features:}
@@ -616,15 +617,44 @@ TruthQuest is designed to be sustainable without relying on continuous external 
 \end{itemize}
 
 % ══════════════════════════════════════════════════════════
+% 13 · APPENDIX: PROJECT LINKS
+% ══════════════════════════════════════════════════════════
+\section{Appendix: Project Links}
+
+\begin{keybox}
+To experience TruthQuest in action and review our technical implementation, please visit the following official links:
+\end{keybox}
+
+\vspace{10pt}
+\begin{tcolorbox}[enhanced, colback=white, colframe=TQindigo!20, boxrule=1pt, arc=6pt, left=15pt, right=15pt, top=10pt, bottom=10pt]
+\begin{itemize}[leftmargin=1.5cm, itemsep=12pt]
+  \item[\Large\textcolor{TQrose}{\faIcon{youtube}}] \textbf{Video Pitch \& Demo}\\
+  Watch our team present the idea and a walkthrough of the app.\\
+  \url{https://youtu.be/7PSYmjF7up0}
+  
+  \item[\Large\textcolor{TQteal}{\faIcon{globe}}] \textbf{Live Web Prototype}\\
+  Try the fully functional application directly in your browser.\\
+  \url{https://truthquest-prototype.onrender.com}
+  
+  \item[\Large\textcolor{TQslate}{\faIcon{github}}] \textbf{Open Source Repository}\\
+  Review our React + Vite codebase and technical architecture.\\
+  \url{https://github.com/1Mejor2345/truthquest-prototype}
+\end{itemize}
+\end{tcolorbox}
+\newpage
+
+% ══════════════════════════════════════════════════════════
 % CLOSING
 % ══════════════════════════════════════════════════════════
-\vspace{10cm}
+\newpage
+\vspace*{\fill}
 \begin{center}
-  {\color{TQindigo}\rule{4cm}{1pt}}\\[16pt]
-  {\huge\textcolor{TQslate}{\textit{``Truth does not defend itself.}}}\\[8pt]
-  {\huge\textcolor{TQslate}{\textit{It is defended by playing.}}}\\[8pt]
-  {\huge\textbf{\textcolor{TQindigo}{\textit{Play Your Part.''}}}}\\[16pt]
-  {\color{TQindigo}\rule{4cm}{1pt}}
+  {\color{TQindigo}\rule{5cm}{1.5pt}}\\[20pt]
+  {\huge\textcolor{TQslate}{\textit{``Truth does not defend itself.}}}\\[12pt]
+  {\huge\textcolor{TQslate}{\textit{It is defended by playing.}}}\\[16pt]
+  {\fontsize{36}{44}\selectfont\textbf{\textcolor{TQindigo}{\textit{Play Your Part.''}}}}\\[20pt]
+  {\color{TQindigo}\rule{5cm}{1.5pt}}
 \end{center}
+\vspace*{\fill}
 
 \end{document}

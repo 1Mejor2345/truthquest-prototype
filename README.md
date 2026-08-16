@@ -5,6 +5,7 @@
   <p><em>Prototipo oficial para el UNESCO Youth Hackathon 2026</em></p>
   
   [![Demo en Vivo](https://img.shields.io/badge/Demo%20en%20Vivo-Render-4F46E5?style=for-the-badge&logo=render)](https://truthquest-prototype.onrender.com)
+  [![Video Pitch](https://img.shields.io/badge/Video-Pitch%20&%20Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/7PSYmjF7up0)
   [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
   [![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
 </div>
@@ -22,13 +23,14 @@ En lugar de cursos tradicionales aburridos, los usuarios aprenden a detectar des
 
 ---
 
-## 🚀 Enlace al Prototipo en Vivo
+## 🚀 Enlaces Oficiales
 
-El prototipo funcional se encuentra desplegado y accesible desde cualquier navegador (PC o móvil):
+El prototipo funcional se encuentra desplegado y accesible desde cualquier navegador (PC o móvil), y puedes ver la presentación completa del proyecto en video:
 
-👉 **[Jugar TruthQuest Ahora](https://truthquest-prototype.onrender.com)**
-
+👉 **[Jugar TruthQuest Ahora (Demo en Vivo)](https://truthquest-prototype.onrender.com)**
 *(Nota: La aplicación está optimizada para verse en formato móvil)*
+
+📺 **[Ver Video Pitch & Demo (YouTube)](https://youtu.be/7PSYmjF7up0)**
 
 ---
 
@@ -69,7 +71,7 @@ Si deseas clonar el repositorio, explorar el código y ejecutar la aplicación e
 ### Instrucciones
 1. **Clonar el repositorio:**
    ```bash
-   git clone https://github.com/1Mejor2345/truthquest-prototype.git
+   git clone [https://github.com/1Mejor2345/truthquest-prototype.git](https://github.com/1Mejor2345/truthquest-prototype.git)
    ```
 
 2. **Entrar al directorio del proyecto:**
